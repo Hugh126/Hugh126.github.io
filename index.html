@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -150,6 +150,97 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hugh126.github.io/2023/07/17/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hugh">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="且把清风揽入怀">
+      <meta itemprop="description" content="道阻且长, 行则将至">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 且把清风揽入怀">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/17/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">跨域问题总结</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-07-17 14:30:03 / 修改时间：15:49:07" itemprop="dateCreated datePublished" datetime="2023-07-17T14:30:03+08:00">2023-07-17</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/07/17/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/07/17/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>跨域问题产生的根本原因是浏览器的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">同源策略</a>。同一个<code>源</code>，即同一<em>协议&#x2F;主机&#x2F;端口</em>元组的资源加载不会被限制。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/17/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -569,9 +660,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-05-23 15:19:44 / 修改时间：15:31:30" itemprop="dateCreated datePublished" datetime="2023-05-23T15:19:44+08:00">2023-05-23</time>
+      <time title="创建时间：2023-05-23 15:19:44" itemprop="dateCreated datePublished" datetime="2023-05-23T15:19:44+08:00">2023-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-07-27 15:55:57" itemprop="dateModified" datetime="2023-07-27T15:55:57+08:00">2023-07-27</time>
     </span>
 
   
@@ -598,7 +695,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在JDK9之后JVM默认使用G1(Garbage-First, 垃圾优先?)垃圾回收。它的特点是把堆内存分割成2048个不连续的Region(区域),并在传统分区的基础上新增了Humongous区(巨大区，对象超过1.5个Region的时候会被放入)。从这些特性上看，确实正如G1所宣传的那样，在满足GC停顿的基础上，极大提高了吞吐量。</p>
+          <p>在JDK9之后JVM默认使用G1(Garbage-First, 垃圾优先)收集器进行垃圾回收。G1是一款分代的 (generational)，增量的 (incremental)，并行的 (parallel)，移动式（evacuating）的，软实时的垃圾回收器。其最大特点是用Region代替传统分代模型，分代成为逻辑上的概念；建立了可预测的停顿时间模型，让暂停时间可配置。从实践结果来看，它能及时有效的回收大对象，增加吞吐量，避免内存碎片，保障程序的长久运行。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/05/23/G1%E6%94%B6%E9%9B%86%E5%99%A8/#more" rel="contents">
@@ -984,107 +1081,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/04/06/Spring-AspectJ%E7%BB%87%E5%85%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hugh126.github.io/2023/04/04/Sping-Cache%E6%BA%90%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hugh">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="且把清风揽入怀">
-      <meta itemprop="description" content="道阻且长, 行则将至">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 且把清风揽入怀">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/04/Sping-Cache%E6%BA%90%E7%A0%81/" class="post-title-link" itemprop="url">Sping Cache源码</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-04 10:27:52" itemprop="dateCreated datePublished" datetime="2023-04-04T10:27:52+08:00">2023-04-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-10 17:13:38" itemprop="dateModified" datetime="2023-04-10T17:13:38+08:00">2023-04-10</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2023/04/04/Sping-Cache%E6%BA%90%E7%A0%81/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2023/04/04/Sping-Cache%E6%BA%90%E7%A0%81/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>我们常说读源码一定要带着问题来读。那么你的疑问又是哪些呢？<br>就与我而言，在大概明白SpringCache的使用方式后，我想知道  </p>
-<ol>
-<li>@EnableCaching 这个注解到底干了什么事情  </li>
-<li>@Cacheable这种方法上的注解，是怎么替换我方法的返回的  </li>
-<li>我想对SpringCache有个更深入一层的理解，后续如果有问题，我知道在哪里去切入。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/04/Sping-Cache%E6%BA%90%E7%A0%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
