@@ -19,17 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hugh126.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="k8s是未来">
+    <meta name="description" content="k8s是未来，理解架构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kubernetes-1-基本架构">
 <meta property="og:url" content="https://hugh126.github.io/2024/01/03/kubernetes-1-%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="且把清风揽入怀">
-<meta property="og:description" content="k8s是未来">
+<meta property="og:description" content="k8s是未来，理解架构">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hugh126.github.io/images/assets/image-20240116140626-xdrpftt.png">
 <meta property="og:image" content="https://hugh126.github.io/images/assets/image-20240117120120-oyzznx1.png">
 <meta property="article:published_time" content="2024-01-03T12:36:05.000Z">
-<meta property="article:modified_time" content="2024-01-30T06:56:03.541Z">
+<meta property="article:modified_time" content="2024-02-02T10:05:56.847Z">
 <meta property="article:author" content="hugh">
 <meta property="article:tag" content="kubernetes">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-30 14:56:03" itemprop="dateModified" datetime="2024-01-30T14:56:03+08:00">2024-01-30</time>
+      <time title="修改时间：2024-02-02 18:05:56" itemprop="dateModified" datetime="2024-02-02T18:05:56+08:00">2024-02-02</time>
     </span>
 
   
@@ -216,41 +216,43 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>k8s是未来</p>
+        <p>k8s是未来，理解架构</p>
 <span id="more"></span>
-
-
 <p>​<img src="/images/assets/image-20240116140626-xdrpftt.png" alt="image">​</p>
 <p>​​<img src="/images/assets/image-20240117120120-oyzznx1.png" alt="image">​​</p>
 <p>‍</p>
-<h2 id="组件及概念"><a href="#组件及概念" class="headerlink" title="组件及概念"></a>组件及概念</h2><h3 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h3><ol>
+<h2 id="组件及概念">组件及概念</h2>
+<h3 id="Master">Master</h3>
+<ol>
 <li>ApiServer： 接口服务</li>
 <li>kube-Controller-manager ： 控制器管理器</li>
 <li>cloud-Controller-manager ： 第三方控制器管理器</li>
 <li>kube-scheduler： （节点）调度器</li>
 </ol>
 <p>‍</p>
-<h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><ol>
+<h3 id="Node">Node</h3>
+<ol>
 <li>kubelet：负责Pod生命周期、存储、网络</li>
 <li>kube-proxy： 网络代理、服务发现负载</li>
 <li>Pod：kubernetes的最小控制单元，容器都是运行在pod中的，一个pod中可以有1个或者多个容器</li>
 <li>container-runtime： 容器运行时环境（docker、containerd…）</li>
 </ol>
 <p>‍</p>
-<h3 id="k8s生态架构"><a href="#k8s生态架构" class="headerlink" title="k8s生态架构"></a>k8s生态架构</h3><ul>
+<h3 id="k8s生态架构">k8s生态架构</h3>
+<ul>
 <li>核心层：Kubernetes 最核心的功能，对外提供 API 构建高层的应用，对内提供插件式应用执行环境</li>
 <li>应用层：部署（无状态应用、有状态应用、批处理任务、集群应用等）和路由（服务发现、DNS 解析等）、Service Mesh（部分位于应用层）</li>
 <li>管理层：系统度量（如基础设施、容器和网络的度量），自动化（如自动扩展、动态 Provision 等）以及策略管理（RBAC、Quota、PSP、NetworkPolicy 等）、Service Mesh（部分位于管理层）</li>
 <li>接口层：kubectl 命令行工具、客户端 SDK 以及集群联邦</li>
-<li>生态系统：日志监控&#x2F;集群配置等<blockquote>
+<li>生态系统：日志监控/集群配置等</li>
+</ul>
+<blockquote>
 <p>作为开发者，最主要的就是理解服务、任务的执行部署方式，熟悉kubectl和API的使用，了解流量控制</p>
 </blockquote>
-</li>
-</ul>
 <hr>
 <p>学习资料:</p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1MT411x7GH?p=10&spm_id_from=pageDriver&vd_source=eeb1c6e015a7ca03cb75e71d6ae0a6e1">2.2.2_集群架构与组件-组件详解：核心组件与分层架构_bilibili_哔哩哔哩_bilibili</a>  </p>
-<p><a target="_blank" rel="noopener" href="https://lib.jimmysong.io/kubernetes-handbook/architecture/">Kubernetes 架构 | 云原生资料库 (jimmysong.io)</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1MT411x7GH?p=10&amp;spm_id_from=pageDriver&amp;vd_source=eeb1c6e015a7ca03cb75e71d6ae0a6e1">2.2.2_集群架构与组件-组件详解：核心组件与分层架构_bilibili_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://lib.jimmysong.io/kubernetes-handbook/architecture/">Kubernetes 架构 | 云原生资料库 (jimmysong.io)</a></p>
 
     </div>
 

@@ -195,7 +195,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-02 18:03:13" itemprop="dateModified" datetime="2024-02-02T18:03:13+08:00">2024-02-02</time>
+      <time title="修改时间：2024-02-02 18:07:24" itemprop="dateModified" datetime="2024-02-02T18:07:24+08:00">2024-02-02</time>
     </span>
 
   
@@ -208,88 +208,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>‍</p>
-<h2 id="一、基本应用"><a href="#一、基本应用" class="headerlink" title="一、基本应用"></a>一、基本应用</h2><ol>
-<li><p>仅使用容器能力</p>
-<blockquote>
-<p>&#x2F;&#x2F; 类似docker启动服务</p>
-<p>kubectl run redis –image=redis</p>
-<p>&#x2F;&#x2F; 查看pod</p>
-<p>kubectl get pods</p>
-<p>&#x2F;&#x2F; 进入容器可直连</p>
-<p>kubectl exec -it redis – bash</p>
-</blockquote>
-</li>
-<li><p>以上应用类似可以指定为k8s独有的Deployment（无状态应用，支持扩容缩容&#x2F;滚动升级，自动重启等），如：</p>
-</li>
-</ol>
-<blockquote>
-<p> kubectl create deployment redis-deployment –image&#x3D;redis</p>
-</blockquote>
-<ol start="3">
-<li><p>具体应用往往不是简单的镜像复制，而包含了很多参数。kubectl支持通过yml配置文件来创建服务</p>
- <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pod.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<p> 指定配置文件启动： <code>kubectl create -f pod.yaml</code>​</p>
-<p>‍</p>
-<p>Pod不具有自愈能力，一般是通过Controller来控制。比如自定义一个nginx：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx-deployment</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">nginx:1.7.9</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
-
-<p>‍</p>
-<p>‍</p>
-<h2 id="二-、kubectl命令汇总"><a href="#二-、kubectl命令汇总" class="headerlink" title="二 、kubectl命令汇总"></a>二 、kubectl命令汇总</h2><blockquote>
-<p>获取节点和服务版本信息<br>kubectl get nodes</p>
-<p>获取pod的信息，以JSON格式展示</p>
-<p>kubectl get pod -o json</p>
-<p>查看所有deployments信息<br>kubectl get deploy -A<br>查看所有replicasets信息<br>kubectl get rs -A<br>查看所有statefulsets信息<br>kubectl get sts -A<br>查看所有jobs信息<br>kubectl get jobs -A<br>查看所有ingresses信息<br>kubectl get ing -A<br>查看有哪些名称空间<br>kubectl get ns</p>
-</blockquote>
-<p>‍常用命令归类：</p>
-<blockquote>
-<p>kubectl get – 输出一个&#x2F;多个资源<br>kubectl create – 通过文件名或控制台输入，创建资源<br>kubectl delete – 通过文件名、控制台输入、资源名或者label selector删除资源<br>kubectl describe – 输出指定的一个&#x2F;多个资源的详细信息<br>kubectl edit – 编辑服务端的资源<br>kubectl apply – 通过文件名或控制台输入，对资源进行配置<br>kubectl exec – 在容器内部执行命令<br>kubectl expose – 输入replication controller，service或者pod，并将其暴露为新的kubernetes service<br>kubectl logs – 输出pod中一个容器的日志  </p>
-</blockquote>
-<p>kuberctl命令行众多，不必死记硬背，在需要的时候查一查<a target="_blank" rel="noopener" href="https://lib.jimmysong.io/kubernetes-handbook/cli/using-kubectl/">kuberctl命令行概览</a>就知道了。  </p>
-<p>另外，开始不熟练可以通过dashboard访问。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行dashboard</span></span><br><span class="line">minikube dashboard</span><br><span class="line"><span class="comment"># 让dashboard可以外部访问</span></span><br><span class="line">kubectl proxy --port=8888 --address=<span class="string">&#x27;0.0.0.0&#x27;</span> --accept-hosts=<span class="string">&#x27;^.*&#x27;</span></span><br><span class="line"><span class="comment"># 获取dashboard的url</span></span><br><span class="line">minikube dashboard --url</span><br></pre></td></tr></table></figure>
-
-<p>‍</p>
-<p>‍</p>
-<h2 id="三、创建无状态服务"><a href="#三、创建无状态服务" class="headerlink" title="三、创建无状态服务"></a>三、创建无状态服务</h2><p>一个 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/tasks/run-application/run-stateless-application-deployment/">Deployment</a> 为 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/">Pod</a> 和 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/replicaset/">ReplicaSet</a> (副本控制器)提供声明式的更新能力  </p>
-<p>‍</p>
-<h3 id="3-1-平滑升级"><a href="#3-1-平滑升级" class="headerlink" title="3.1  平滑升级"></a>3.1  平滑升级</h3><p>创建有两个备份的nginx，版本号14:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">https://k8s.io/examples/application/deployment.yaml</span></span><br><span class="line"><span class="comment"># 查看deployment详情</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">describe</span> <span class="string">deployment</span> <span class="string">nginx-deployment</span></span><br><span class="line"><span class="comment"># 通过标签查询pod信息</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">get</span> <span class="string">pods</span> <span class="string">-l</span> <span class="string">app=nginx</span></span><br></pre></td></tr></table></figure>
-
-<p>现在用一个新版本号的yml文件来， 升级nginx版本：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">https://k8s.io/examples/application/deployment-update.yaml</span></span><br><span class="line"><span class="comment"># 也可以直接通过参数指定</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">set</span> <span class="string">image</span> <span class="string">deployment/nginx-deployment</span> <span class="string">nginx=nginx:1.9.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不断查看pod观察</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">get</span> <span class="string">pods</span> <span class="string">-l</span> <span class="string">app=nginx</span></span><br><span class="line"><span class="comment"># 重新查看deployment详情，校验版本号</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">describe</span> <span class="string">deployment</span> <span class="string">nginx-deployment</span></span><br></pre></td></tr></table></figure>
-
-<p>观察输出的Events信息，会先启动新的服务，然后停掉旧的；这个升级过程是平滑的</p>
-<blockquote>
-<p>StrategyType:       RollingUpdate<br>MinReadySeconds:    0<br>RollingUpdateStrategy:  1 max unavailable, 1 max surge</p>
-</blockquote>
-<p>‍</p>
-<h3 id="3-2-动态扩容缩容"><a href="#3-2-动态扩容缩容" class="headerlink" title="3.2 动态扩容缩容"></a>3.2 动态扩容缩容</h3><ul>
-<li><p>扩容</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">https://k8s.io/examples/application/deployment-scale.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以使用scale缩放</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">scale</span> <span class="string">deployment/nginx-deployment</span> <span class="string">--replicas=4</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>缩容</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定备份数</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">scale</span> <span class="string">deployment/nginx-deployment</span> <span class="string">--replicas=2</span></span><br><span class="line"><span class="comment"># 按比例缩放</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">autoscale</span> <span class="string">deployment/nginx-deployment</span> <span class="string">--min=2</span> <span class="string">--max=10</span> <span class="string">--cpu-percent=80</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="3-3-回滚"><a href="#3-3-回滚" class="headerlink" title="3.3 回滚"></a>3.3 回滚</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接回滚</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">rollout</span> <span class="string">undo</span> <span class="string">deployment/nginx-deployment</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取历史</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">rollout</span> <span class="string">history</span> <span class="string">deployment/nginx-deployment</span></span><br><span class="line"><span class="comment"># 指定版本详情</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">rollout</span> <span class="string">history</span> <span class="string">deployment/nginx-deployment</span> <span class="string">--revision=2</span></span><br><span class="line"><span class="comment"># 回滚到指定版本</span></span><br><span class="line"><span class="string">kubectl</span> <span class="string">rollout</span> <span class="string">undo</span> <span class="string">deployment/nginx-deployment</span> <span class="string">--to-revision=2</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="四、创建有状态服务集群"><a href="#四、创建有状态服务集群" class="headerlink" title="四、创建有状态服务集群"></a>四、创建有状态服务集群</h2><p>StatefulSet 是用来管理有状态应用的工作负载 API 对象。</p>
-<p>参考： <a target="_blank" rel="noopener" href="https://juejin.cn/post/7033600843131666469">https://juejin.cn/post/7033600843131666469</a>  </p>
-<p>创建一个主从结构的Redis集群：  </p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># server.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StatefulSet</span>  <span class="comment"># 类型为 statefulset</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">redis-sfs</span>  <span class="comment"># app 名称</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">serviceName:</span> <span class="string">redis-sfs</span>  <span class="comment"># 这里的 service 下面解释</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">2</span>      <span class="comment"># 定义了两个副本</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">redis-sfs</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">redis-sfs</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">redis-sfs</span> </span><br><span class="line">        <span class="attr">image:</span> <span class="string">redis</span>  <span class="comment"># 镜像版本</span></span><br><span class="line">        <span class="attr">command:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">bash</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">&quot;-c&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">|</span></span><br><span class="line"><span class="string">            set -ex</span></span><br><span class="line"><span class="string">            ordinal=`hostname | awk -F &#x27;-&#x27; &#x27;&#123;print $NF&#125;&#x27;`   # 使用 hostname 获取序列</span></span><br><span class="line"><span class="string">            if [[ $ordinal -eq 0 ]]; then     # 如果是 0，作为主</span></span><br><span class="line"><span class="string">              echo &gt; /tmp/redis.conf</span></span><br><span class="line"><span class="string">            else</span></span><br><span class="line"><span class="string">              echo &quot;slaveof redis-sfs-0.redis-sfs 6379&quot; &gt; /tmp/redis.conf # 如果是 1，作为备</span></span><br><span class="line"><span class="string">            fi</span></span><br><span class="line"><span class="string">            redis-server /tmp/redis.conf</span></span><br></pre></td></tr></table></figure>
-
-<p>执行<code>kubectl apply -f server.yaml</code> , 这里会创建redis-sfs-0 和 redis-sfs-1 两个 pod，他们正式按照 name-index 的规则来编号的。</p>
-<p>上面的两个节点创建了，但是却是分开的两个主节点，而不是一主一从。需要建立Service，将它们放到一组：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># service.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">redis-sfs</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">redis-sfs</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">clusterIP:</span> <span class="string">None</span>   <span class="comment"># 这里的 None 就是 Headless 的意思，表示会主动由 k8s 分配</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">redis-sfs</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">redis-sfs</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>执行<code>kubectl apply -f service.yaml</code> ，再查看日志 <code>kubectl logs -f redis-sfs-1</code>， 会获取主从连接信息。</p>
-<p>‍</p>
-<p>‍</p>
-<p>‍</p>
-<p>‍</p>
-
+          <p>k8s是未来，理解了基础架构和概念后，从实践入手</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/01/30/kubernetes-3-%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -351,7 +278,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-02 17:42:52" itemprop="dateModified" datetime="2024-02-02T17:42:52+08:00">2024-02-02</time>
+      <time title="修改时间：2024-02-02 18:06:50" itemprop="dateModified" datetime="2024-02-02T18:06:50+08:00">2024-02-02</time>
     </span>
 
   
@@ -364,7 +291,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/assets/image-20240116183723-ievwwyy.png" alt="image"></p>
+          <p>k8s是未来，理解各类基本概念再开始</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/01/30/kubernetes-2-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/#more" rel="contents">
@@ -837,7 +764,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-30 14:56:03" itemprop="dateModified" datetime="2024-01-30T14:56:03+08:00">2024-01-30</time>
+      <time title="修改时间：2024-02-02 18:05:56" itemprop="dateModified" datetime="2024-02-02T18:05:56+08:00">2024-02-02</time>
     </span>
 
   
@@ -850,7 +777,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>k8s是未来</p>
+          <p>k8s是未来，理解架构</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/01/03/kubernetes-1-%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/#more" rel="contents">
