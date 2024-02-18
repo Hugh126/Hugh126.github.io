@@ -86,7 +86,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section">关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
   </ul>
 </nav>
 
@@ -123,19 +123,25 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">标签</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/Hugh126" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Hugh126" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/Hugh126/daydayup?tab=readme-ov-file" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Hugh126&#x2F;daydayup?tab&#x3D;readme-ov-file" rel="noopener me" target="_blank">GitHub</a>
       </span>
   </div>
 
@@ -150,6 +156,98 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hugh126.github.io/2023/04/06/Spring-AspectJ%E7%BB%87%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hugh">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="且把清风揽入怀">
+      <meta itemprop="description" content="道阻且长, 行则将至">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 且把清风揽入怀">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/04/06/Spring-AspectJ%E7%BB%87%E5%85%A5/" class="post-title-link" itemprop="url">Spring-AspectJ织入</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-06 14:05:35" itemprop="dateCreated datePublished" datetime="2023-04-06T14:05:35+08:00">2023-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-18 16:30:47" itemprop="dateModified" datetime="2024-02-18T16:30:47+08:00">2024-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring+</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最开始用Spring切面的时候听说是基于AspectJ的，便认为SpringAop是依赖AspectJ实现的。其实不然，SpringAop其实不依赖AspectJ，它本身的AOP功能是基于SpringBean管理的，通过动态代理(JDK或CgLib)实现的。然而，这却不是一个完整的AOP解决方案，所以需要引入AspectJ。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/06/Spring-AspectJ%E7%BB%87%E5%85%A5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -195,7 +293,16 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-10 17:13:38" itemprop="dateModified" datetime="2023-04-10T17:13:38+08:00">2023-04-10</time>
+      <time title="修改时间：2024-02-18 16:30:13" itemprop="dateModified" datetime="2024-02-18T16:30:13+08:00">2024-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring+</span></a>
+        </span>
     </span>
 
   
@@ -208,11 +315,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>我们常说读源码一定要带着问题来读。那么你的疑问又是哪些呢？<br>就与我而言，在大概明白SpringCache的使用方式后，我想知道  </p>
+          <p>我们常说读源码一定要带着问题来读。那么你的疑问又是哪些呢？<br>
+就与我而言，在大概明白SpringCache的使用方式后，我想知道</p>
 <ol>
-<li>@EnableCaching 这个注解到底干了什么事情  </li>
-<li>@Cacheable这种方法上的注解，是怎么替换我方法的返回的  </li>
-<li>我想对SpringCache有个更深入一层的理解，后续如果有问题，我知道在哪里去切入。
+<li>@EnableCaching 这个注解到底干了什么事情</li>
+<li>@Cacheable这种方法上的注解，是怎么替换我方法的返回的</li>
+<li>我想对SpringCache有个更深入一层的理解，后续如果有问题，我知道在哪里去切入。</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/04/04/Sping-Cache%E6%BA%90%E7%A0%81/#more" rel="contents">
@@ -282,7 +391,16 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-07 16:00:50" itemprop="dateModified" datetime="2023-04-07T16:00:50+08:00">2023-04-07</time>
+      <time title="修改时间：2024-02-18 16:31:07" itemprop="dateModified" datetime="2024-02-18T16:31:07+08:00">2024-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring+</span></a>
+        </span>
     </span>
 
   
@@ -295,7 +413,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>SpringCache是Spring基于Spring切面提供的缓存增强技术。它集成了缓存常见的各种操作,如Cacheable&#x2F;CachePut&#x2F;CacheEvit等；也支持了ConcurrentMapCache&#x2F;RedisCache&#x2F;EhCacheCache等各种缓存实现。它集成简单，支持丰富，实乃是业务开发的利器！  </p>
+          <p>SpringCache是Spring基于Spring切面提供的缓存增强技术。它集成了缓存常见的各种操作,如Cacheable/CachePut/CacheEvit等；也支持了ConcurrentMapCache/RedisCache/EhCacheCache等各种缓存实现。它集成简单，支持丰富，实乃是业务开发的利器！</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/03/31/Spring-Cache/#more" rel="contents">
@@ -365,7 +483,16 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-25 10:48:33" itemprop="dateModified" datetime="2023-06-25T10:48:33+08:00">2023-06-25</time>
+      <time title="修改时间：2024-02-18 16:24:09" itemprop="dateModified" datetime="2024-02-18T16:24:09+08:00">2024-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%97%AE%E9%A2%98%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">问题经验</span></a>
+        </span>
     </span>
 
   
@@ -448,7 +575,16 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-22 17:54:28" itemprop="dateModified" datetime="2023-03-22T17:54:28+08:00">2023-03-22</time>
+      <time title="修改时间：2024-02-18 16:25:58" itemprop="dateModified" datetime="2024-02-18T16:25:58+08:00">2024-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring+</span></a>
+        </span>
     </span>
 
   
@@ -461,7 +597,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Google Protocol Buffer(简称Protobuf)是 Google开发的一种跨语言跨平台,轻量高效的序列化数据结构。<br>广泛用于服务器间通信以及存档存储磁盘上的数据。</p>
+          <p>Google Protocol Buffer(简称Protobuf)是 Google开发的一种跨语言跨平台,轻量高效的序列化数据结构。<br>
+广泛用于服务器间通信以及存档存储磁盘上的数据。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/03/19/protobuf/#more" rel="contents">
@@ -531,7 +668,16 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-11 15:09:29" itemprop="dateModified" datetime="2023-04-11T15:09:29+08:00">2023-04-11</time>
+      <time title="修改时间：2024-02-18 16:21:59" itemprop="dateModified" datetime="2024-02-18T16:21:59+08:00">2024-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring+</span></a>
+        </span>
     </span>
 
   
