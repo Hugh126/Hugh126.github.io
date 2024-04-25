@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">1. Gradle与 Maven的比较</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">2. 安装与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 配置镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-IDEA%E9%85%8D%E7%BD%AE%E4%B8%8Ewrapper"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 IDEA配置与wrapper</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">3. Gradle使用</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Gradle%E4%B8%8E-Maven%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.</span> <span class="nav-text">1. Gradle与 Maven的比较</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">2. 安装与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 配置镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-IDEA%E9%85%8D%E7%BD%AE%E4%B8%8Ewrapper"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 IDEA配置与wrapper</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Gradle%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">3. Gradle使用</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -131,18 +131,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -234,10 +234,11 @@
     <div class="post-body" itemprop="articleBody">
         <p>现在越来越多的开源项目都使用gradle来构建，而且基于gradle灵活的语法和增量构建等特性，在大型项目构建的时候大大节约了时间，实乃高效干活的利器，不得不学起来~</p>
 <span id="more"></span>
-<h1>1. Gradle与 Maven的比较</h1>
-<blockquote>
-<p>Gradle和Maven两种构建方式存在一些根本差异。 Gradle基于任务依赖关系图-其中任务就是工作，而Maven是基于固定的过程和线性模型。使用Maven构建项目时，目标将附加到项目阶段，目标的作用类似于Gradle的任务，即“完成任务的事物”。</p>
-<p>1.1 在性能方面，两者都允许多模块构建并行运行。但是，Gradle允许增量构建，因为它检查是否更新了哪些任务。如果是这样，则不执行任务，从而使构建时间大大缩短。Gradle上其他出色的性能功能包括：</p>
+
+
+<h1 id="1-Gradle与-Maven的比较"><a href="#1-Gradle与-Maven的比较" class="headerlink" title="1. Gradle与 Maven的比较"></a>1. Gradle与 Maven的比较</h1><blockquote>
+<p>Gradle和Maven两种构建方式存在一些根本差异。 Gradle基于任务依赖关系图-其中任务就是工作，而Maven是基于固定的过程和线性模型。使用Maven构建项目时，目标将附加到项目阶段，目标的作用类似于Gradle的任务，即“完成任务的事物”。  </p>
+<p>1.1 在性能方面，两者都允许多模块构建并行运行。但是，Gradle允许增量构建，因为它检查是否更新了哪些任务。如果是这样，则不执行任务，从而使构建时间大大缩短。Gradle上其他出色的性能功能包括：  </p>
 <ul>
 <li>Java类的增量编译</li>
 <li>防止反编译</li>
@@ -246,43 +247,28 @@
 </ul>
 <p>1.2 在管理依赖项时，Gradle和Maven都可以处理动态和传递性依赖项，以使用第三方依赖项缓存，并读取POM元数据格式。还可以通过中央版本控制定义声明库版本并强制执行中央版本控制。两者都从其artifact 仓库下载可传递依赖项。Maven具有Maven Central，而Gradle具有JCenter，也可以定义自己的私人公司存储库。如果需要多个依赖项，Maven可以同时下载它们。</p>
 </blockquote>
-<h1>2. 安装与配置</h1>
-<h2 id="2-1-安装">2.1 安装</h2>
-<p>从<a target="_blank" rel="noopener" href="https://services.gradle.org/distributions/">安装目录</a>找一个不那么早的下载，然后配置环境变量：<br>
-<code>GRADLE_HOME</code>,然后<code>%GRADLE_HOME%\bin</code>目录加入到path<br>
-<code>gradle -v</code> 验证</p>
-<h2 id="2-2-配置镜像">2.2 配置镜像</h2>
-<p>init.d文件夹下新增 <strong>init.gradle</strong> 设置国内代理</p>
+<h1 id="2-安装与配置"><a href="#2-安装与配置" class="headerlink" title="2. 安装与配置"></a>2. 安装与配置</h1><h2 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h2><p>从<a target="_blank" rel="noopener" href="https://services.gradle.org/distributions/">安装目录</a>找一个不那么早的下载，然后配置环境变量：<br><code>GRADLE_HOME</code>,然后<code>%GRADLE_HOME%\bin</code>目录加入到path<br><code>gradle -v</code> 验证  </p>
+<h2 id="2-2-配置镜像"><a href="#2-2-配置镜像" class="headerlink" title="2.2 配置镜像"></a>2.2 配置镜像</h2><p>init.d文件夹下新增 <strong>init.gradle</strong> 设置国内代理</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        maven &#123; url <span class="string">&#x27;file://D:/maven_repo&#x27;</span>&#125;</span><br><span class="line">        mavenLocal()</span><br><span class="line">        maven &#123; name <span class="string">&quot;Alibaba&quot;</span> ; url <span class="string">&quot;https://maven.aliyun.com/repository/public&quot;</span> &#125;</span><br><span class="line">        maven &#123; name <span class="string">&quot;Bstek&quot;</span> ; url <span class="string">&quot;http://nexus.bsdn.org/content/groups/public/&quot;</span>&#125;</span><br><span class="line">        mavenCentral()</span><br><span class="line">    &#125;</span><br><span class="line">    buildscript &#123; </span><br><span class="line">        repositories &#123; </span><br><span class="line">            maven &#123; name <span class="string">&quot;Alibaba&quot;</span> ; url <span class="string">&#x27;https://maven.aliyun.com/repository/public&#x27;</span>&#125;</span><br><span class="line">            maven &#123; name <span class="string">&quot;Bstek&quot;</span> ; url <span class="string">&#x27;http://nexus.bsdn.org/content/groups/public/&#x27;</span> &#125;</span><br><span class="line">            maven &#123; name <span class="string">&quot;M2&quot;</span> ; url <span class="string">&#x27;https://plugins.gradle.org/m2/&#x27;</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 这里有个指向本地目录是gradle本地仓库，其实也可以是maven本地仓库</p>
-<h2 id="2-3-IDEA配置与wrapper">2.3 IDEA配置与wrapper</h2>
-<p>如果我们直接使用IDEA新建一个用gradle构建的项目，会发现它的结构有点不一样：</p>
+<p><strong>注意：</strong> 这里有个指向本地目录是gradle本地仓库，其实也可以是maven本地仓库  </p>
+<h2 id="2-3-IDEA配置与wrapper"><a href="#2-3-IDEA配置与wrapper" class="headerlink" title="2.3 IDEA配置与wrapper"></a>2.3 IDEA配置与wrapper</h2><p>如果我们直接使用IDEA新建一个用gradle构建的项目，会发现它的结构有点不一样：  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-src</span><br><span class="line">-gradle</span><br><span class="line">	-warpper</span><br><span class="line">		-gradle-wrapper.jar</span><br><span class="line">		-gradle-wrapper.properties</span><br><span class="line">-build.gradle #构建脚本，类似pom.xml</span><br><span class="line">-gradlew #Linux系统的包装启动脚本</span><br><span class="line">-gradlew.bat #windows系统的包装启动脚本</span><br><span class="line">-settings.gradle #定义项目信息</span><br></pre></td></tr></table></figure>
-<p>warpper文件夹其实是对gradle的一层包装，为了：</p>
+<p>warpper文件夹其实是对gradle的一层包装，为了：  </p>
 <ol>
-<li>在未安装gradle的环境运行</li>
-<li>gradle的发展太快了，有时候需要切换版本，也可以使用gradlew代替。这样就使用的是附带jar的版本了。<br>
-gradle-wrapper.properties</li>
+<li>在未安装gradle的环境运行  </li>
+<li>gradle的发展太快了，有时候需要切换版本，也可以使用gradlew代替。这样就使用的是附带jar的版本了。<br>gradle-wrapper.properties<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gradle解包后存储的父目录</span></span><br><span class="line"><span class="attr">distributionBase</span>=GRADLE_USER_HOME</span><br><span class="line"><span class="comment"># 指定目录的子目录</span></span><br><span class="line"><span class="attr">distributionPath</span>=wrapper/dists</span><br><span class="line"><span class="comment"># Gradle指定版本的压缩包下载地址</span></span><br><span class="line"><span class="attr">distributionUrl</span>=https\://services.gradle.org/distributions/gradle-<span class="number">7.6</span>.<span class="number">1</span>-bin.zip</span><br><span class="line"><span class="comment"># Gradle压缩包下载后存储父目录</span></span><br><span class="line"><span class="attr">zipStoreBase</span>=GRADLE_USER_HOME</span><br><span class="line"><span class="comment"># Gradle压缩包下载后存储子目录</span></span><br><span class="line"><span class="attr">zipStorePath</span>=wrapper/dists</span><br></pre></td></tr></table></figure>
+<code>GRADLE_USER_HOME</code>类似maven的本地仓库，如果不指定一般会放到用户.gradle目录，C盘估计又要爆炸了。这里可以指定为maven的本地仓库目录，然后设置到环境变量。虽然它并不会使用maven的缓存（两者缓存格式不一致）。</li>
 </ol>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gradle解包后存储的父目录</span></span><br><span class="line"><span class="attr">distributionBase</span>=GRADLE_USER_HOME</span><br><span class="line"><span class="comment"># 指定目录的子目录</span></span><br><span class="line"><span class="attr">distributionPath</span>=wrapper/dists</span><br><span class="line"><span class="comment"># Gradle指定版本的压缩包下载地址</span></span><br><span class="line"><span class="attr">distributionUrl</span>=https\://services.gradle.org/distributions/gradle-<span class="number">7.6</span>.<span class="number">1</span>-bin.zip</span><br><span class="line"><span class="comment"># Gradle压缩包下载后存储父目录</span></span><br><span class="line"><span class="attr">zipStoreBase</span>=GRADLE_USER_HOME</span><br><span class="line"><span class="comment"># Gradle压缩包下载后存储子目录</span></span><br><span class="line"><span class="attr">zipStorePath</span>=wrapper/dists</span><br></pre></td></tr></table></figure>
-<p><code>GRADLE_USER_HOME</code>类似maven的本地仓库，如果不指定一般会放到用户.gradle目录，C盘估计又要爆炸了。这里可以指定为maven的本地仓库目录，然后设置到环境变量。虽然它并不会使用maven的缓存（两者缓存格式不一致）。</p>
-<p>以下是gradlew工作流程：<br>
-<img src="https://docs.gradle.org/current/userguide/img/wrapper-workflow.png" alt="gradlew工作流程"></p>
-<p>以下是IDEA的配置截图<br>
-<img src="/images/gradle-idea-config.png" alt=""></p>
-<h1>3. Gradle使用</h1>
-<p>常用gradle指令,与maven类似</p>
+<p>以下是gradlew工作流程：<br><img src="https://docs.gradle.org/current/userguide/img/wrapper-workflow.png" alt="gradlew工作流程">  </p>
+<p>以下是IDEA的配置截图<br><img src="/images/gradle-idea-config.png">  </p>
+<h1 id="3-Gradle使用"><a href="#3-Gradle使用" class="headerlink" title="3. Gradle使用"></a>3. Gradle使用</h1><p>常用gradle指令,与maven类似  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 构建项目</span><br><span class="line">gradle build</span><br><span class="line"># 清空build目录</span><br><span class="line">gradle clean</span><br><span class="line"># 编译测试代码，生成测试报告</span><br><span class="line">gradle test</span><br><span class="line"># 跳过测试构建</span><br><span class="line">gradle build-x test</span><br></pre></td></tr></table></figure>
-<p>IDEA自带的Gradle集成了这些常见命令，另外还对应用也做了支持：<br>
-比如这里可以直接Run应用的Main：<br>
-<img src="/images/gradle-command.png" alt=""></p>
+<p>IDEA自带的Gradle集成了这些常见命令，另外还对应用也做了支持：<br>比如这里可以直接Run应用的Main：<br><img src="/images/gradle-command.png"></p>
 <hr>
 <hr>
 <p>关于gradle自定义任务及groovy语言，以后需要再深入研究吧。。</p>
-<p>Groovy语法参考：<br>
-<a target="_blank" rel="noopener" href="http://www.groovy-lang.org/testing.html#_introduction">http://www.groovy-lang.org/testing.html#_introduction</a></p>
-<p>gradle_wrapper更多：<br>
-<a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/gradle_wrapper.html#gradle_wrapper">https://docs.gradle.org/current/userguide/gradle_wrapper.html#gradle_wrapper</a></p>
+<p>Groovy语法参考：<br><a target="_blank" rel="noopener" href="http://www.groovy-lang.org/testing.html#_introduction">http://www.groovy-lang.org/testing.html#_introduction</a></p>
+<p>gradle_wrapper更多：<br><a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/gradle_wrapper.html#gradle_wrapper">https://docs.gradle.org/current/userguide/gradle_wrapper.html#gradle_wrapper</a></p>
 
     </div>
 

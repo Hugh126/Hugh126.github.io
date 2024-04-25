@@ -27,7 +27,7 @@
 <meta property="og:description" content="作为后端&#x2F;架构人员，在技术选型、服务架构设计的时候，或是造完一个轮子的时候，总是想尝试下极限在哪。此刻压测必不可少，此文介绍各种常见压测工具优缺点，也记录下基本用法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-29T07:22:59.000Z">
-<meta property="article:modified_time" content="2024-02-18T08:23:09.835Z">
+<meta property="article:modified_time" content="2024-04-11T03:37:57.898Z">
 <meta property="article:author" content="hugh">
 <meta property="article:tag" content="压力测试">
 <meta name="twitter:card" content="summary">
@@ -114,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E8%AF%B4%E4%B8%8B%E7%BB%93%E8%AE%BA"><span class="nav-number">1.1.</span> <span class="nav-text">先说下结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">一、Jmeter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 安装使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%B1%87%E6%80%BB%E6%8A%A5%E5%91%8A"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 汇总报告</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">二、Apache Benchmark</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%B1%87%E6%80%BB%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 汇总结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">三、sysbench</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E7%AE%80%E4%BB%8B"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E8%BF%9B%E9%98%B6"><span class="nav-number">4.3.</span> <span class="nav-text">3.2 进阶</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">四、java.jdk.concurrent</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E8%AF%B4%E4%B8%8B%E7%BB%93%E8%AE%BA"><span class="nav-number">1.1.</span> <span class="nav-text">先说下结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81Jmeter"><span class="nav-number">2.</span> <span class="nav-text">一、Jmeter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 安装使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%B1%87%E6%80%BB%E6%8A%A5%E5%91%8A"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 汇总报告</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Apache-Benchmark"><span class="nav-number">3.</span> <span class="nav-text">二、Apache Benchmark</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%B1%87%E6%80%BB%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 汇总结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81sysbench"><span class="nav-number">4.</span> <span class="nav-text">三、sysbench</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E7%AE%80%E4%BB%8B"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E8%BF%9B%E9%98%B6"><span class="nav-number">4.3.</span> <span class="nav-text">3.2 进阶</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81java-jdk-concurrent"><span class="nav-number">5.</span> <span class="nav-text">四、java.jdk.concurrent</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -127,18 +127,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -206,7 +206,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-18 16:23:09" itemprop="dateModified" datetime="2024-02-18T16:23:09+08:00">2024-02-18</time>
+      <time title="修改时间：2024-04-11 11:37:57" itemprop="dateModified" datetime="2024-04-11T11:37:57+08:00">2024-04-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -214,7 +214,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%97%AE%E9%A2%98%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">问题经验</span></a>
+          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
         </span>
     </span>
 
@@ -228,51 +228,35 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>作为后端/架构人员，在技术选型、服务架构设计的时候，或是造完一个轮子的时候，总是想尝试下极限在哪。此刻压测必不可少，此文介绍各种常见压测工具优缺点，也记录下基本用法。</p>
+        <p>作为后端&#x2F;架构人员，在技术选型、服务架构设计的时候，或是造完一个轮子的时候，总是想尝试下极限在哪。此刻压测必不可少，此文介绍各种常见压测工具优缺点，也记录下基本用法。</p>
 <span id="more"></span>
-<h1>序</h1>
-<h2 id="先说下结论">先说下结论</h2>
-<ul>
-<li>对于并发测试，首推Jmeter。原因：功能强大、可视化、速度很快。熟悉ab工具的，也可以使用ab，一行命令就搞定。</li>
-<li>对于数据库测试，必用sysbench。原因：功能强大，可扩展，还可以造数据。<code>注意：不支持windows</code></li>
-<li>对于复杂一点的测试，很难找到现成工具，那就自己造轮子吧</li>
-</ul>
-<blockquote>
+
+<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><h2 id="先说下结论"><a href="#先说下结论" class="headerlink" title="先说下结论"></a>先说下结论</h2><ul>
+<li>对于并发测试，首推Jmeter。原因：功能强大、可视化、速度很快。熟悉ab工具的，也可以使用ab，一行命令就搞定。 </li>
+<li>对于数据库测试，必用sysbench。原因：功能强大，可扩展，还可以造数据。<code>注意：不支持windows</code>  </li>
+<li>对于复杂一点的测试，很难找到现成工具，那就自己造轮子吧<blockquote>
 <p>有人会说postman也可以测试，还支持前置脚本。其实那不是并发，而且也没有汇总结果。再说下国产新的<code>Apifox</code>，搜索Jmeter居然出来的是它，而且广告做的到处都是。我最近的测试首先就用了它，结果大失所望，功能配置好像是很强大的，集成了很多。可是，太慢了…可能，这也是国产软件的通病。</p>
 </blockquote>
-<h1>一、Jmeter</h1>
-<p><a target="_blank" rel="noopener" href="https://jmeter.apache.org">Jmeter</a>Jmeter是由Apache公司开发的一个纯Java的开源项目，即可以用于做接口测试也可以用于做性能测试。</p>
-<h2 id="1-1-安装使用步骤">1.1 安装使用步骤</h2>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142897766">参考</a><br>
-基本使用步骤：<br>
-1. 测试计划 -&gt; 添加 -&gt; 线程（用户）-&gt; 线程组<br>
-2. 线程组 -&gt; 添加 -&gt; 取样器 -&gt; HTTP请求<br>
-3. HTTP请求 -&gt; 添加 -&gt; 监听器 -&gt; 查看结果树<br>
-4. HTTP请求 -&gt; 添加 -&gt; 监听器 -&gt; 汇总报告</p>
-<h2 id="1-2-汇总报告">1.2 汇总报告</h2>
-<p><strong>汇总报告结果默认时间单位是ms</strong></p>
-<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/797451">Jmeter性能指标分析参考</a></p>
-<h1>二、Apache Benchmark</h1>
-<p>Apache 出品的一个 HTTP 服务器性能测试工具。使用它可以测试每秒请求数、吞吐率等参数。</p>
-<h2 id="2-1-基本用法">2.1 基本用法</h2>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># -c  设定并发数，默认并发数是 <span class="number">1</span></span><br><span class="line"># -n  设定压测的请求总数</span><br><span class="line"># -t  设定压测的时长，单位是秒</span><br><span class="line">ab -c <span class="number">10</span> -n <span class="number">1000</span> http://example.com</span><br></pre></td></tr></table></figure>
-<h2 id="2-2-汇总结果">2.2 汇总结果</h2>
-<p>主要看两个参数<code>Requests per second</code>和<code>Percentage of the request</code>吧<br>
-<a target="_blank" rel="noopener" href="https://blog.csdn.net/u011585609/article/details/104821068">使用参考</a></p>
-<h1>三、sysbench</h1>
-<h2 id="3-1-简介">3.1 简介</h2>
-<p>sysbench内置的测试项包括内存/CPU/线程/事务/互斥锁，但是一般用来做数据库的测试。 它是全开源的<code>lua</code>写的，各种测试运行都基于lua脚本，可以很便捷的扩展。<br>
-它主要是三个阶段：<br>
-prepare（准备数据）/ run（执行测试）/ clean（清理测试数据）</p>
-<h2 id="3-2-基本使用">3.2 基本使用</h2>
-<p>例如你只是想测试下新搭建的mysql集群读写性能，你可以：</p>
+</li>
+</ul>
+<h1 id="一、Jmeter"><a href="#一、Jmeter" class="headerlink" title="一、Jmeter"></a>一、Jmeter</h1><p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/">Jmeter</a>Jmeter是由Apache公司开发的一个纯Java的开源项目，即可以用于做接口测试也可以用于做性能测试。  </p>
+<h2 id="1-1-安装使用步骤"><a href="#1-1-安装使用步骤" class="headerlink" title="1.1 安装使用步骤"></a>1.1 安装使用步骤</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142897766">参考</a><br>    基本使用步骤：<br>    1. 测试计划 -&gt; 添加 -&gt; 线程（用户）-&gt; 线程组<br>    2. 线程组 -&gt; 添加 -&gt; 取样器 -&gt; HTTP请求<br>    3. HTTP请求 -&gt; 添加 -&gt; 监听器 -&gt; 查看结果树<br>    4. HTTP请求 -&gt; 添加 -&gt; 监听器 -&gt; 汇总报告 </p>
+<h2 id="1-2-汇总报告"><a href="#1-2-汇总报告" class="headerlink" title="1.2 汇总报告"></a>1.2 汇总报告</h2><p><strong>汇总报告结果默认时间单位是ms</strong></p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/797451">Jmeter性能指标分析参考</a>  </p>
+<h1 id="二、Apache-Benchmark"><a href="#二、Apache-Benchmark" class="headerlink" title="二、Apache Benchmark"></a>二、Apache Benchmark</h1><p>Apache 出品的一个 HTTP 服务器性能测试工具。使用它可以测试每秒请求数、吞吐率等参数。  </p>
+<h2 id="2-1-基本用法"><a href="#2-1-基本用法" class="headerlink" title="2.1 基本用法"></a>2.1 基本用法</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># -c  设定并发数，默认并发数是 <span class="number">1</span></span><br><span class="line"># -n  设定压测的请求总数</span><br><span class="line"># -t  设定压测的时长，单位是秒</span><br><span class="line">ab -c <span class="number">10</span> -n <span class="number">1000</span> http://example.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-汇总结果"><a href="#2-2-汇总结果" class="headerlink" title="2.2 汇总结果"></a>2.2 汇总结果</h2><p>主要看两个参数<code>Requests per second</code>和<code>Percentage of the request</code>吧<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011585609/article/details/104821068">使用参考</a></p>
+<h1 id="三、sysbench"><a href="#三、sysbench" class="headerlink" title="三、sysbench"></a>三、sysbench</h1><h2 id="3-1-简介"><a href="#3-1-简介" class="headerlink" title="3.1 简介"></a>3.1 简介</h2><p>sysbench内置的测试项包括内存&#x2F;CPU&#x2F;线程&#x2F;事务&#x2F;互斥锁，但是一般用来做数据库的测试。 它是全开源的<code>lua</code>写的，各种测试运行都基于lua脚本，可以很便捷的扩展。<br>它主要是三个阶段：<br>prepare（准备数据）&#x2F; run（执行测试）&#x2F; clean（清理测试数据）  </p>
+<h2 id="3-2-基本使用"><a href="#3-2-基本使用" class="headerlink" title="3.2 基本使用"></a>3.2 基本使用</h2><p>例如你只是想测试下新搭建的mysql集群读写性能，你可以：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 准备数据：创建<span class="number">5</span>个表，每个表<span class="number">100</span>条数据</span><br><span class="line">sysbench /usr/share/sysbench/oltp_read_write.lua <span class="comment">--tables=5 --table_size=100 --mysql-user=root --mysql-password=xxx --mysql-host=192.168.0.103 --mysql-port=3306 --mysql-db=sysbench_test prepare</span></span><br><span class="line"># 使用的线程数量为<span class="number">16</span>个，使用的存储引擎为InnoDB，测试事务运行</span><br><span class="line">sysbench  <span class="comment">--num-threads=16 --test=oltp --mysql-table-engine=innodb --tables=5 --table_size=100 --mysql-user=root --mysql-password=xxx --mysql-host=192.168.0.103 --mysql-port=3306 --mysql-db=sysbench_test run</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-2-进阶">3.2 进阶</h2>
-<p>可以发现，准备阶段给我们生成的测试数据结构是固定的。如果我们想更贴切地模拟想要测试的内容，可以像上一段中使用的LUA脚本地址：<code>/usr/share/sysbench/oltp_read_write.lua</code>。这个是自带的lua脚本，也可以自定义一套。</p>
+
+<h2 id="3-2-进阶"><a href="#3-2-进阶" class="headerlink" title="3.2 进阶"></a>3.2 进阶</h2><p>可以发现，准备阶段给我们生成的测试数据结构是固定的。如果我们想更贴切地模拟想要测试的内容，可以像上一段中使用的LUA脚本地址：<code>/usr/share/sysbench/oltp_read_write.lua</code>。这个是自带的lua脚本，也可以自定义一套。  </p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tangbinghaochi/p/6292905.html">sysbench使用参考</a></p>
-<h1>四、java.jdk.concurrent</h1>
-<p>jdk并发包下有很多工具也可以实现并发请求，对于一些需要构造数据或有特定步骤的复杂测试，自己编码反而更为便利。这里以<code>CountDownLatch</code>为例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CountDownLatch</span> <span class="variable">countDownLatch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(<span class="number">1</span>);</span><br><span class="line"><span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line">Function&lt;Integer, Thread&gt; supplier = index -&gt; (<span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        countDownLatch.await();</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">        log.warn(Thread.currentThread().getName() + <span class="string">&quot; : index &quot;</span> + index + <span class="string">&quot; done&quot;</span> );</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br><span class="line">IntStream.range(<span class="number">1</span>, <span class="number">11</span>).mapToObj(x -&gt; supplier.apply(x)).forEach(executorService::submit);</span><br><span class="line">countDownLatch.countDown();</span><br><span class="line"><span class="keyword">while</span> (!executorService.awaitTermination(<span class="number">200L</span>,TimeUnit.MILLISECONDS)) &#123;</span><br><span class="line">    executorService.shutdown();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="四、java-jdk-concurrent"><a href="#四、java-jdk-concurrent" class="headerlink" title="四、java.jdk.concurrent"></a>四、java.jdk.concurrent</h1><p>jdk并发包下有很多工具也可以实现并发请求，对于一些需要构造数据或有特定步骤的复杂测试，自己编码反而更为便利。这里以<code>CountDownLatch</code>为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line">Function&lt;Integer, Thread&gt; supplier = index -&gt; (<span class="keyword">new</span> Thread(()-&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        countDownLatch.await();</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">        log.warn(Thread.currentThread().getName() + <span class="string">&quot; : index &quot;</span> + index + <span class="string">&quot; done&quot;</span> );</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br><span class="line">IntStream.range(<span class="number">1</span>, <span class="number">11</span>).mapToObj(x -&gt; supplier.apply(x)).forEach(executorService::submit);</span><br><span class="line">countDownLatch.countDown();</span><br><span class="line"><span class="keyword">while</span> (!executorService.awaitTermination(<span class="number">200L</span>,TimeUnit.MILLISECONDS)) &#123;</span><br><span class="line">    executorService.shutdown();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
     </div>
 

@@ -117,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ClickHouse"><span class="nav-number">1.1.</span> <span class="nav-text">ClickHouse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Doris"><span class="nav-number">1.2.</span> <span class="nav-text">Doris</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Doris%E4%B8%8EClickHouse%E5%AF%B9%E6%AF%94"><span class="nav-number">1.3.</span> <span class="nav-text">Doris与ClickHouse对比</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ClickHouse"><span class="nav-number">1.1.</span> <span class="nav-text">ClickHouse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Doris"><span class="nav-number">1.2.</span> <span class="nav-text">Doris</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Doris%E4%B8%8EClickHouse%E5%AF%B9%E6%AF%94"><span class="nav-number">1.3.</span> <span class="nav-text">Doris与ClickHouse对比</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -130,18 +130,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -231,31 +231,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>随着业务的发展，数据时常是指数级增长，数据提取/BI报表/数据挖掘总是被提及。那么如何支撑？如何建设数仓，如何支持实时分析?</p>
+        <p>随着业务的发展，数据时常是指数级增长，数据提取&#x2F;BI报表&#x2F;数据挖掘总是被提及。那么如何支撑？如何建设数仓，如何支持实时分析?</p>
 <span id="more"></span>
-<h1>序</h1>
-<p>传统行业随着业务深入，无可避免会涉及BI的需要。用传统的PGSQL有点跟不上时代，也跟不上BOSS门的’奇思妙想’了，大刀阔斧的追赶潮流又缺人缺资源。想选择最优实践方案，就必须’货比三家’，打开自己的脑壳。以下：</p>
+
+<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>传统行业随着业务深入，无可避免会涉及BI的需要。用传统的PGSQL有点跟不上时代，也跟不上BOSS门的’奇思妙想’了，大刀阔斧的追赶潮流又缺人缺资源。想选择最优实践方案，就必须’货比三家’，打开自己的脑壳。以下：  </p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/2oeEcqgLEbbPZHnp0kAElQ">Doris的应用，360数仓演进进程</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/448265353">OLAP介绍</a></p>
 <p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040428093">开源OLAP引擎对比</a></p>
-<h2 id="ClickHouse">ClickHouse</h2>
-<ul>
-<li>
-<p>官网安装体验<br>
-安装(<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/getting-started/">https://clickhouse.com/docs/zh/getting-started/</a><br>
-install)</p>
+<h2 id="ClickHouse"><a href="#ClickHouse" class="headerlink" title="ClickHouse"></a>ClickHouse</h2><ul>
+<li><p>官网安装体验<br>安装(<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/getting-started/">https://clickhouse.com/docs/zh/getting-started/</a><br>install)</p>
 </li>
-<li>
-<p>导入数据<br>
-支持外表引擎和第三方工具(<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/beta/article/1602662">https://cloud.tencent.com/developer/beta/article/1602662</a>)</p>
+<li><p>导入数据<br>支持外表引擎和第三方工具(<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/beta/article/1602662">https://cloud.tencent.com/developer/beta/article/1602662</a>)</p>
 </li>
 </ul>
-<h2 id="Doris">Doris</h2>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/387050823">Doris简史</a></p>
-<h2 id="Doris与ClickHouse对比">Doris与ClickHouse对比</h2>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/421469439">自己构建更复杂的用ClickHouse，省力用Doris</a><br>
-实则Doris脱胎于百度广告业务，国内社区资源更丰富,可以看下<a target="_blank" rel="noopener" href="https://doris.apache.org/zh-CN/blog/">其他公司的实践</a></p>
-<p><img src="https://cdn-tencent.selectdb.com/zh-CN/assets/images/page_3-zh-bb25c0ea2faa03912dea231b8b207d3e.png" alt=""></p>
+<h2 id="Doris"><a href="#Doris" class="headerlink" title="Doris"></a>Doris</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/387050823">Doris简史</a></p>
+<h2 id="Doris与ClickHouse对比"><a href="#Doris与ClickHouse对比" class="headerlink" title="Doris与ClickHouse对比"></a>Doris与ClickHouse对比</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/421469439">自己构建更复杂的用ClickHouse，省力用Doris</a><br>实则Doris脱胎于百度广告业务，国内社区资源更丰富,可以看下<a target="_blank" rel="noopener" href="https://doris.apache.org/zh-CN/blog/">其他公司的实践</a>  </p>
+<p><img src="https://cdn-tencent.selectdb.com/zh-CN/assets/images/page_3-zh-bb25c0ea2faa03912dea231b8b207d3e.png"></p>
 
     </div>
 

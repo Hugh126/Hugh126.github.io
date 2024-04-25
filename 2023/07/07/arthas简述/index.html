@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://hugh126.github.io/images/arthas1.png">
 <meta property="og:image" content="https://hugh126.github.io/images/arthas2.png">
 <meta property="article:published_time" content="2023-07-07T09:28:08.000Z">
-<meta property="article:modified_time" content="2024-02-18T08:18:53.644Z">
+<meta property="article:modified_time" content="2024-04-11T03:38:07.021Z">
 <meta property="article:author" content="hugh">
 <meta property="article:tag" content="arthas">
 <meta name="twitter:card" content="summary">
@@ -130,18 +130,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-18 16:18:53" itemprop="dateModified" datetime="2024-02-18T16:18:53+08:00">2024-02-18</time>
+      <time title="修改时间：2024-04-11 11:38:07" itemprop="dateModified" datetime="2024-04-11T11:38:07+08:00">2024-04-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -217,7 +217,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%97%AE%E9%A2%98%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">问题经验</span></a>
+          <a href="/categories/troubleshooting/" itemprop="url" rel="index"><span itemprop="name">troubleshooting</span></a>
         </span>
     </span>
 
@@ -255,7 +255,7 @@
 </blockquote>
 <h2 id="观察每次方法调用"><a href="#观察每次方法调用" class="headerlink" title="观察每次方法调用"></a>观察每次方法调用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch</span><br><span class="line">watch com.mxzhang.erp.employee.controller.ErpEmployeeController datagrid <span class="string">&#x27;&#123;params,target,returnObj&#125;&#x27;</span> -x 3</span><br><span class="line"></span><br><span class="line">// 观察具体参数</span><br><span class="line">watch com.mxzhang.erp.employee.controller.ErpEmployeeController datagrid  <span class="string">&#x27;target&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="7-追踪方法调用栈"><a href="#7-追踪方法调用栈" class="headerlink" title="7. 追踪方法调用栈"></a>7. 追踪方法调用栈</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[arthas@22714]$ trace com.mxzhang.erp.employee.controller.ErpEmployeeController datagrid <span class="string">&#x27;#cost &gt; 10&#x27;</span></span><br><span class="line">Press Q or Ctrl+C to abort.</span><br><span class="line">Affect(class count: 1 , method count: 1) cost <span class="keyword">in</span> 542 ms, listenerId: 15</span><br><span class="line">`---ts=2020-12-04 15:00:42;thread_name=http-nio-8181-exec-21;<span class="built_in">id</span>=c0;is_daemon=<span class="literal">true</span>;priority=5;TCCL=org.apache.catalina.loader.ParallelWebappClassLoader@3b165738</span><br><span class="line">    `---[1208.379063ms] com.mxzhang.erp.employee.controller.ErpEmployeeController:datagrid()</span><br><span class="line">        +---[5.28227ms] com.mxzhang.erp.employee.controller.ErpEmployeeController:createDatagridCriteriaQuery() <span class="comment">#675</span></span><br><span class="line">        +---[0.021024ms] javax.servlet.http.HttpServletRequest:getParameter() <span class="comment">#676</span></span><br><span class="line">        +---[0.016183ms] com.mxzhang.erp.utils.StringUtils:isNotEmpty() <span class="comment">#677</span></span><br><span class="line">        +---[0.016176ms] org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery:add() <span class="comment">#680</span></span><br><span class="line">        +---[0.025832ms] org.hibernate.criterion.Restrictions:disjunction() <span class="comment">#681</span></span><br><span class="line">        +---[0.015999ms] javax.servlet.http.HttpServletRequest:getParameter() <span class="comment">#683</span></span><br><span class="line">        +---[0.016274ms] javax.servlet.http.HttpServletRequest:getParameter() <span class="comment">#684</span></span><br><span class="line">        +---[0.015918ms] com.mxzhang.erp.utils.StringUtils:isNotEmpty() <span class="comment">#685</span></span><br><span class="line">        +---[0.019184ms] com.mxzhang.erp.utils.StringUtils:isNotEmpty() <span class="comment">#690</span></span><br><span class="line">        +---[0.031676ms] org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery:add() <span class="comment">#693</span></span><br><span class="line">        +---[44.915965ms] com.mxzhang.erp.employee.service.ErpEmployeeServiceI:getDataGridReturn() <span class="comment">#694</span></span><br><span class="line">        +---[0.031499ms] org.jeecgframework.core.common.model.json.DataGrid:getResults() <span class="comment">#695</span></span><br><span class="line">        +---[34.233436ms] com.mxzhang.erp.employee.controller.ErpEmployeeController:postProcessEmployeeList() <span class="comment">#696</span></span><br><span class="line">        `---[1122.992269ms] org.jeecgframework.tag.core.easyui.TagUtil:datagrid() <span class="comment">#697</span></span><br></pre></td></tr></table></figure>
+<h2 id="7-追踪方法调用栈"><a href="#7-追踪方法调用栈" class="headerlink" title="7. 追踪方法调用栈"></a>7. 追踪方法调用栈</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[arthas@22714]$ trace com.mxzhang.erp.employee.controller.ErpEmployeeController datagrid <span class="string">&#x27;#cost &gt; 10&#x27;</span></span><br><span class="line">Press Q or Ctrl+C to abort.</span><br><span class="line">Affect(class count: 1 , method count: 1) cost <span class="keyword">in</span> 542 ms, listenerId: 15</span><br><span class="line">`---ts=2020-12-04 15:00:42;thread_name=http-nio-8181-exec-21;id=c0;is_daemon=<span class="literal">true</span>;priority=5;TCCL=org.apache.catalina.loader.ParallelWebappClassLoader@3b165738</span><br><span class="line">    `---[1208.379063ms] com.mxzhang.erp.employee.controller.ErpEmployeeController:datagrid()</span><br><span class="line">        +---[5.28227ms] com.mxzhang.erp.employee.controller.ErpEmployeeController:createDatagridCriteriaQuery() <span class="comment">#675</span></span><br><span class="line">        +---[0.021024ms] javax.servlet.http.HttpServletRequest:getParameter() <span class="comment">#676</span></span><br><span class="line">        +---[0.016183ms] com.mxzhang.erp.utils.StringUtils:isNotEmpty() <span class="comment">#677</span></span><br><span class="line">        +---[0.016176ms] org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery:add() <span class="comment">#680</span></span><br><span class="line">        +---[0.025832ms] org.hibernate.criterion.Restrictions:disjunction() <span class="comment">#681</span></span><br><span class="line">        +---[0.015999ms] javax.servlet.http.HttpServletRequest:getParameter() <span class="comment">#683</span></span><br><span class="line">        +---[0.016274ms] javax.servlet.http.HttpServletRequest:getParameter() <span class="comment">#684</span></span><br><span class="line">        +---[0.015918ms] com.mxzhang.erp.utils.StringUtils:isNotEmpty() <span class="comment">#685</span></span><br><span class="line">        +---[0.019184ms] com.mxzhang.erp.utils.StringUtils:isNotEmpty() <span class="comment">#690</span></span><br><span class="line">        +---[0.031676ms] org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery:add() <span class="comment">#693</span></span><br><span class="line">        +---[44.915965ms] com.mxzhang.erp.employee.service.ErpEmployeeServiceI:getDataGridReturn() <span class="comment">#694</span></span><br><span class="line">        +---[0.031499ms] org.jeecgframework.core.common.model.json.DataGrid:getResults() <span class="comment">#695</span></span><br><span class="line">        +---[34.233436ms] com.mxzhang.erp.employee.controller.ErpEmployeeController:postProcessEmployeeList() <span class="comment">#696</span></span><br><span class="line">        `---[1122.992269ms] org.jeecgframework.tag.core.easyui.TagUtil:datagrid() <span class="comment">#697</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>这个功能在调优的时候非常实用，可以看到每行代码的耗时。这种功能一般只有GW的付费软件才有</strong>  </p>
 <h3 id="次数限制"><a href="#次数限制" class="headerlink" title="次数限制"></a>次数限制</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trace demo.MathGame run -n 1</span><br></pre></td></tr></table></figure>

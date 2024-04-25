@@ -115,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">一 AOP相关概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">二 织入时期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">三 SpringAOP和AspectJ差异</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">四 解决SpringAOP方法内调用失效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">五 加载时织入(LTW)</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-AOP%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一 AOP相关概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E7%BB%87%E5%85%A5%E6%97%B6%E6%9C%9F"><span class="nav-number">2.</span> <span class="nav-text">二 织入时期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-SpringAOP%E5%92%8CAspectJ%E5%B7%AE%E5%BC%82"><span class="nav-number">3.</span> <span class="nav-text">三 SpringAOP和AspectJ差异</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-%E8%A7%A3%E5%86%B3SpringAOP%E6%96%B9%E6%B3%95%E5%86%85%E8%B0%83%E7%94%A8%E5%A4%B1%E6%95%88"><span class="nav-number">4.</span> <span class="nav-text">四 解决SpringAOP方法内调用失效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-%E5%8A%A0%E8%BD%BD%E6%97%B6%E7%BB%87%E5%85%A5-LTW"><span class="nav-number">5.</span> <span class="nav-text">五 加载时织入(LTW)</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,18 +128,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -231,12 +231,10 @@
     <div class="post-body" itemprop="articleBody">
         <p>最开始用Spring切面的时候听说是基于AspectJ的，便认为SpringAop是依赖AspectJ实现的。其实不然，SpringAop其实不依赖AspectJ，它本身的AOP功能是基于SpringBean管理的，通过动态代理(JDK或CgLib)实现的。然而，这却不是一个完整的AOP解决方案，所以需要引入AspectJ。</p>
 <span id="more"></span>  
-<h1>一 AOP相关概念</h1>
-<ul>
+<h1 id="一-AOP相关概念"><a href="#一-AOP相关概念" class="headerlink" title="一 AOP相关概念"></a>一 AOP相关概念</h1><ul>
 <li>Aspect	切面</li>
 <li>Pointcut 切点，织入Advice的触发条件，也称为Joinpoint</li>
-<li>Advice 增强，切面中切点处的具体行为
-<ul>
+<li>Advice 增强，切面中切点处的具体行为<ul>
 <li>Around	环绕增强，目标方法执行前后分别执行一些代码</li>
 <li>AfterReturning	返回增强，目标方法正常执行完毕时执行</li>
 <li>Before	前置增强，目标方法执行之前执行</li>
@@ -246,53 +244,42 @@
 </li>
 <li>Weaving 织入，在切点处执行增强的过程</li>
 </ul>
-<h1>二 织入时期</h1>
-<ul>
-<li>Compile-time weaving
-<blockquote>
-<p>编译期织入，编译的时候织入代码，运行时直接运行</p>
+<h1 id="二-织入时期"><a href="#二-织入时期" class="headerlink" title="二 织入时期"></a>二 织入时期</h1><ul>
+<li>Compile-time weaving  <blockquote>
+<p>编译期织入，编译的时候织入代码，运行时直接运行 </p>
 </blockquote>
 </li>
-<li>Post-compile weaving
-<blockquote>
+<li>Post-compile weaving<blockquote>
 <p>编译期后织入，编译后二进制织入，一般此时织入的是已存在的class或者jar</p>
 </blockquote>
 </li>
-<li>Load-time weaving
-<blockquote>
+<li>Load-time weaving<blockquote>
 <p>加载期织入，也是二进制织入，但此时是加载到JVM之前</p>
 </blockquote>
 </li>
 </ul>
-<h1>三 SpringAOP和AspectJ差异</h1>
-<p>通过以上所述，SpringAop是通过动态代理在运行时织入，而AspectJ是通过字节码技术在编译期（或加载期）织入。用代码抽象表述了下，方便理解：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line">	methodA&#123;</span><br><span class="line">	<span class="comment">// do some thing</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AProxy</span>-SpringAop&#123;</span><br><span class="line"></span><br><span class="line">	doMethodA &#123;</span><br><span class="line">		<span class="comment">// advice before</span></span><br><span class="line">		methodA();</span><br><span class="line">		<span class="comment">// advice after</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	methodA&#123;</span><br><span class="line">	<span class="comment">// do some thing</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AProxy</span>-AspectJ&#123;</span><br><span class="line">	methodA&#123;</span><br><span class="line">	<span class="comment">// advice before</span></span><br><span class="line">	<span class="comment">// do some thing</span></span><br><span class="line">	<span class="comment">// advice after</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>更多关于两者差异和关联可参考：<br>
-<a target="_blank" rel="noopener" href="https://www.baeldung.com/spring-aop-vs-aspectj">https://www.baeldung.com/spring-aop-vs-aspectj</a></p>
-<p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html">https://docs.spring.io/spring-framework/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html</a></p>
-<h1>四 解决SpringAOP方法内调用失效</h1>
-<p>用SpringAop不论是完成异步调用、事务、缓存操作，都不能避免内部方法调用失效的尴尬。可以参考的解决方案有：</p>
+<h1 id="三-SpringAOP和AspectJ差异"><a href="#三-SpringAOP和AspectJ差异" class="headerlink" title="三 SpringAOP和AspectJ差异"></a>三 SpringAOP和AspectJ差异</h1><p>通过以上所述，SpringAop是通过动态代理在运行时织入，而AspectJ是通过字节码技术在编译期（或加载期）织入。用代码抽象表述了下，方便理解：  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	methodA&#123;</span><br><span class="line">	<span class="comment">// do some thing</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AProxy</span>-<span class="title">SpringAop</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	doMethodA &#123;</span><br><span class="line">		<span class="comment">// advice before</span></span><br><span class="line">		methodA();</span><br><span class="line">		<span class="comment">// advice after</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	methodA&#123;</span><br><span class="line">	<span class="comment">// do some thing</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AProxy</span>-<span class="title">AspectJ</span></span>&#123;</span><br><span class="line">	methodA&#123;</span><br><span class="line">	<span class="comment">// advice before</span></span><br><span class="line">	<span class="comment">// do some thing</span></span><br><span class="line">	<span class="comment">// advice after</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>更多关于两者差异和关联可参考：<br><a target="_blank" rel="noopener" href="https://www.baeldung.com/spring-aop-vs-aspectj">https://www.baeldung.com/spring-aop-vs-aspectj</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html">https://docs.spring.io/spring-framework/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html</a>  </p>
+<h1 id="四-解决SpringAOP方法内调用失效"><a href="#四-解决SpringAOP方法内调用失效" class="headerlink" title="四 解决SpringAOP方法内调用失效"></a>四 解决SpringAOP方法内调用失效</h1><p>用SpringAop不论是完成异步调用、事务、缓存操作，都不能避免内部方法调用失效的尴尬。可以参考的解决方案有：  </p>
 <ul>
-<li>AopContext.currentProxy() 获取当前代理对象再调用目标方法</li>
-<li>@Autowired self； 通过注入自身来调用</li>
+<li>AopContext.currentProxy() 获取当前代理对象再调用目标方法  </li>
+<li>@Autowired self； 通过注入自身来调用  </li>
 <li>把方法2拆分到新的Bean中，避免类方法调用</li>
 </ul>
-<h1>五 加载时织入(LTW)</h1>
-<p>大致方法是将aspectjweaver.jar作为agent传入JVM，在加载时织入相应Advice。下面以SpringCache中使用AspectJ为例（事务和异步都是一样的操作）:</p>
+<h1 id="五-加载时织入-LTW"><a href="#五-加载时织入-LTW" class="headerlink" title="五 加载时织入(LTW)"></a>五 加载时织入(LTW)</h1><p>大致方法是将aspectjweaver.jar作为agent传入JVM，在加载时织入相应Advice。下面以SpringCache中使用AspectJ为例（事务和异步都是一样的操作）:  </p>
 <ol>
-<li>新增依赖</li>
-</ol>
+<li><p>新增依赖  </p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-aspects<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>修改代理模式</li>
-</ol>
+</li>
+<li><p>修改代理模式  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableCaching(mode = AdviceMode.ASPECTJ)</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>传入agent</li>
+</li>
+<li><p>传入agent  </p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 启动参数新增agent</span><br><span class="line">-javaagent:D:\Tools\aspectjweaver-<span class="number">1</span>.<span class="number">9</span>.<span class="number">19</span>.jar</span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 启动参数新增agent</span><br><span class="line">-javaagent:D:\Tools\aspectjweaver-<span class="number">1</span>.<span class="number">9</span>.<span class="number">19</span>.jar</span><br></pre></td></tr></table></figure>
-<p>更多关于Spring中使用LTW的可以参考：<br>
-<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-aj-ltw">https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-aj-ltw</a></p>
+<p>更多关于Spring中使用LTW的可以参考：<br><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-aj-ltw">https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-aj-ltw</a></p>
 
     </div>
 

@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://hugh126.github.io/images/assets/image-20240116170034-fs3xv9q.png">
 <meta property="og:image" content="https://hugh126.github.io/images/assets/image-20240116170050-p7vvxyi.png">
 <meta property="article:published_time" content="2024-01-16T09:05:39.000Z">
-<meta property="article:modified_time" content="2024-02-18T08:26:32.547Z">
+<meta property="article:modified_time" content="2024-04-11T03:39:16.793Z">
 <meta property="article:author" content="hugh">
 <meta property="article:tag" content="RBAC">
 <meta name="twitter:card" content="summary">
@@ -119,7 +119,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">RBAC权限模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Role-BasedAccess-Control"><span class="nav-number">1.1.</span> <span class="nav-text">Role-BasedAccess Control</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC0-%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90%E5%88%86%E7%A6%BB"><span class="nav-number">1.2.</span> <span class="nav-text">RBAC0 : 用户与权限分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC1-%E8%A7%92%E8%89%B2%E5%AD%98%E5%9C%A8%E5%B1%82%E7%BA%A7%EF%BC%8C%E4%BD%8E%E7%BA%A7%E8%A7%92%E8%89%B2%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF%E9%AB%98%E7%BA%A7%E8%A7%92%E8%89%B2%E6%9D%83%E9%99%90"><span class="nav-number">1.3.</span> <span class="nav-text">RBAC1 :角色存在层级，低级角色可以继承高级角色权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC2-%E8%A7%92%E8%89%B2%E5%AD%98%E5%9C%A8%E4%BA%92%E6%96%A5%E5%85%B3%E7%B3%BB%EF%BC%8C%E8%8E%B7%E5%8F%96%E6%9C%89%E9%99%90%E5%88%B6%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">RBAC2 : 角色存在互斥关系，获取有限制条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC3-%E7%BB%9F%E4%B8%80%E8%A7%92%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.5.</span> <span class="nav-text">RBAC3 统一角色模型</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RBAC%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">RBAC权限模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Role-BasedAccess-Control"><span class="nav-number">1.1.</span> <span class="nav-text">Role-BasedAccess Control</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC0-%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90%E5%88%86%E7%A6%BB"><span class="nav-number">1.2.</span> <span class="nav-text">RBAC0 : 用户与权限分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC1-%E8%A7%92%E8%89%B2%E5%AD%98%E5%9C%A8%E5%B1%82%E7%BA%A7%EF%BC%8C%E4%BD%8E%E7%BA%A7%E8%A7%92%E8%89%B2%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF%E9%AB%98%E7%BA%A7%E8%A7%92%E8%89%B2%E6%9D%83%E9%99%90"><span class="nav-number">1.3.</span> <span class="nav-text">RBAC1 :角色存在层级，低级角色可以继承高级角色权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC2-%E8%A7%92%E8%89%B2%E5%AD%98%E5%9C%A8%E4%BA%92%E6%96%A5%E5%85%B3%E7%B3%BB%EF%BC%8C%E8%8E%B7%E5%8F%96%E6%9C%89%E9%99%90%E5%88%B6%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">RBAC2 : 角色存在互斥关系，获取有限制条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC3-%E7%BB%9F%E4%B8%80%E8%A7%92%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.5.</span> <span class="nav-text">RBAC3 统一角色模型</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -132,18 +132,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -211,7 +211,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-18 16:26:32" itemprop="dateModified" datetime="2024-02-18T16:26:32+08:00">2024-02-18</time>
+      <time title="修改时间：2024-04-11 11:39:16" itemprop="dateModified" datetime="2024-04-11T11:39:16+08:00">2024-04-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -219,7 +219,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%97%AE%E9%A2%98%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">问题经验</span></a>
+          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
         </span>
     </span>
 
@@ -235,39 +235,29 @@
     <div class="post-body" itemprop="articleBody">
         <p>权限管理模型有很多，但是最为经典实用的还是RBAC。若想设计权限模型或对其进行扩展，了解RBAC是必不可少的功课</p>
 <span id="more"></span>
-<h1>RBAC权限模型</h1>
-<h2 id="Role-BasedAccess-Control">Role-BasedAccess Control</h2>
-<ul>
+<h1 id="RBAC权限模型"><a href="#RBAC权限模型" class="headerlink" title="RBAC权限模型"></a>RBAC权限模型</h1><h2 id="Role-BasedAccess-Control"><a href="#Role-BasedAccess-Control" class="headerlink" title="Role-BasedAccess Control"></a>Role-BasedAccess Control</h2><ul>
 <li>传统：直接对用户授权</li>
 <li>RBAC: 基于角色的权限管理</li>
 </ul>
 <p>​<img src="/images/assets/image-20240116165959-vy9w5gu.png" alt="image">​</p>
 <p>‍</p>
-<h2 id="RBAC0-用户与权限分离">RBAC0 : 用户与权限分离</h2>
-<p>​<img src="/images/assets/image-20240116170020-sq3x22z.png" alt="image">​</p>
+<h2 id="RBAC0-用户与权限分离"><a href="#RBAC0-用户与权限分离" class="headerlink" title="RBAC0 : 用户与权限分离"></a>RBAC0 : 用户与权限分离</h2><p>​<img src="/images/assets/image-20240116170020-sq3x22z.png" alt="image">​</p>
 <p>‍</p>
-<h2 id="RBAC1-角色存在层级，低级角色可以继承高级角色权限">RBAC1 :角色存在层级，低级角色可以继承高级角色权限</h2>
-<p>​<img src="/images/assets/image-20240116170034-fs3xv9q.png" alt="image">​</p>
+<h2 id="RBAC1-角色存在层级，低级角色可以继承高级角色权限"><a href="#RBAC1-角色存在层级，低级角色可以继承高级角色权限" class="headerlink" title="RBAC1 :角色存在层级，低级角色可以继承高级角色权限"></a>RBAC1 :角色存在层级，低级角色可以继承高级角色权限</h2><p>​<img src="/images/assets/image-20240116170034-fs3xv9q.png" alt="image">​</p>
 <p>‍</p>
 <p>‍</p>
-<h2 id="RBAC2-角色存在互斥关系，获取有限制条件">RBAC2 : 角色存在互斥关系，获取有限制条件</h2>
-<p>​<img src="/images/assets/image-20240116170050-p7vvxyi.png" alt="image">​</p>
+<h2 id="RBAC2-角色存在互斥关系，获取有限制条件"><a href="#RBAC2-角色存在互斥关系，获取有限制条件" class="headerlink" title="RBAC2 : 角色存在互斥关系，获取有限制条件"></a>RBAC2 : 角色存在互斥关系，获取有限制条件</h2><p>​<img src="/images/assets/image-20240116170050-p7vvxyi.png" alt="image">​</p>
 <ul>
 <li>静态：互斥角色无法赋予同一用户</li>
 <li>动态：登录时切换角色</li>
 </ul>
 <p>‍</p>
-<h2 id="RBAC3-统一角色模型">RBAC3 统一角色模型</h2>
-<p>RBAC3=RBAC1+RBAC2</p>
+<h2 id="RBAC3-统一角色模型"><a href="#RBAC3-统一角色模型" class="headerlink" title="RBAC3 统一角色模型"></a>RBAC3 统一角色模型</h2><p>RBAC3&#x3D;RBAC1+RBAC2</p>
 <hr>
 <ul>
-<li>思考<br>
-RBAC基本能满足大部分的授权要求，但是在一些实际业务场景中，时常会遇到需要对部分数据、按钮的进行“隐藏”（或授权才可访问）的需求。<br>
-这时候，基于属性的访问控制模型(ABAC: Attribute-Based Access Control)或可满足需求。但是这种过于分散的模型本身并无实际意义，在实际业务中还是需要去落实到具体组件、行为。</li>
+<li>思考<br>RBAC基本能满足大部分的授权要求，但是在一些实际业务场景中，时常会遇到需要对部分数据、按钮的进行“隐藏”（或授权才可访问）的需求。<br>这时候，基于属性的访问控制模型(ABAC: Attribute-Based Access Control)或可满足需求。但是这种过于分散的模型本身并无实际意义，在实际业务中还是需要去落实到具体组件、行为。</li>
 </ul>
-<p>比如：<br>
-1、RBAC模型中可以建立互斥抽象的高级角色来对应一些限制行为<br>
-2、对于访问类要求，可以参考JeecgBoot的PermissionData](<a target="_blank" rel="noopener" href="http://doc.jeecg.com/2044046">http://doc.jeecg.com/2044046</a>)，允许用户自定义访问规则</p>
+<p>比如：<br>1、RBAC模型中可以建立互斥抽象的高级角色来对应一些限制行为<br>2、对于访问类要求，可以参考JeecgBoot的PermissionData](<a target="_blank" rel="noopener" href="http://doc.jeecg.com/2044046)%EF%BC%8C%E5%85%81%E8%AE%B8%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AE%BF%E9%97%AE%E8%A7%84%E5%88%99">http://doc.jeecg.com/2044046)，允许用户自定义访问规则</a></p>
 
     </div>
 

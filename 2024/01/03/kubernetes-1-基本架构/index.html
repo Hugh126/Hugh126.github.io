@@ -130,18 +130,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -233,41 +233,39 @@
     <div class="post-body" itemprop="articleBody">
         <p>k8s是未来，理解架构</p>
 <span id="more"></span>
+
+
 <p>​<img src="/images/assets/image-20240116140626-xdrpftt.png" alt="image">​</p>
 <p>​​<img src="/images/assets/image-20240117120120-oyzznx1.png" alt="image">​​</p>
 <p>‍</p>
-<h2 id="组件及概念">组件及概念</h2>
-<h3 id="Master">Master</h3>
-<ol>
+<h2 id="组件及概念"><a href="#组件及概念" class="headerlink" title="组件及概念"></a>组件及概念</h2><h3 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h3><ol>
 <li>ApiServer： 接口服务</li>
 <li>kube-Controller-manager ： 控制器管理器</li>
 <li>cloud-Controller-manager ： 第三方控制器管理器</li>
 <li>kube-scheduler： （节点）调度器</li>
 </ol>
 <p>‍</p>
-<h3 id="Node">Node</h3>
-<ol>
+<h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><ol>
 <li>kubelet：负责Pod生命周期、存储、网络</li>
 <li>kube-proxy： 网络代理、服务发现负载</li>
 <li>Pod：kubernetes的最小控制单元，容器都是运行在pod中的，一个pod中可以有1个或者多个容器</li>
 <li>container-runtime： 容器运行时环境（docker、containerd…）</li>
 </ol>
 <p>‍</p>
-<h3 id="k8s生态架构">k8s生态架构</h3>
-<ul>
+<h3 id="k8s生态架构"><a href="#k8s生态架构" class="headerlink" title="k8s生态架构"></a>k8s生态架构</h3><ul>
 <li>核心层：Kubernetes 最核心的功能，对外提供 API 构建高层的应用，对内提供插件式应用执行环境</li>
 <li>应用层：部署（无状态应用、有状态应用、批处理任务、集群应用等）和路由（服务发现、DNS 解析等）、Service Mesh（部分位于应用层）</li>
 <li>管理层：系统度量（如基础设施、容器和网络的度量），自动化（如自动扩展、动态 Provision 等）以及策略管理（RBAC、Quota、PSP、NetworkPolicy 等）、Service Mesh（部分位于管理层）</li>
 <li>接口层：kubectl 命令行工具、客户端 SDK 以及集群联邦</li>
-<li>生态系统：日志监控/集群配置等</li>
-</ul>
-<blockquote>
+<li>生态系统：日志监控&#x2F;集群配置等<blockquote>
 <p>作为开发者，最主要的就是理解服务、任务的执行部署方式，熟悉kubectl和API的使用，了解流量控制</p>
 </blockquote>
+</li>
+</ul>
 <hr>
 <p>学习资料:</p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1MT411x7GH?p=10&amp;spm_id_from=pageDriver&amp;vd_source=eeb1c6e015a7ca03cb75e71d6ae0a6e1">2.2.2_集群架构与组件-组件详解：核心组件与分层架构_bilibili_哔哩哔哩_bilibili</a></p>
-<p><a target="_blank" rel="noopener" href="https://lib.jimmysong.io/kubernetes-handbook/architecture/">Kubernetes 架构 | 云原生资料库 (jimmysong.io)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1MT411x7GH?p=10&spm_id_from=pageDriver&vd_source=eeb1c6e015a7ca03cb75e71d6ae0a6e1">2.2.2_集群架构与组件-组件详解：核心组件与分层架构_bilibili_哔哩哔哩_bilibili</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://lib.jimmysong.io/kubernetes-handbook/architecture/">Kubernetes 架构 | 云原生资料库 (jimmysong.io)</a>  </p>
 
     </div>
 

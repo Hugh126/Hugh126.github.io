@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hugh126.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Google Protocol Buffer(简称Protobuf)是 Google开发的一种跨语言跨平台,轻量高效的序列化数据结构。 广泛用于服务器间通信以及存档存储磁盘上的数据。">
+    <meta name="description" content="Google Protocol Buffer(简称Protobuf)是 Google开发的一种跨语言跨平台,轻量高效的序列化数据结构。广泛用于服务器间通信以及存档存储磁盘上的数据。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="protobuf">
 <meta property="og:url" content="https://hugh126.github.io/2023/03/19/protobuf/index.html">
 <meta property="og:site_name" content="且把清风揽入怀">
-<meta property="og:description" content="Google Protocol Buffer(简称Protobuf)是 Google开发的一种跨语言跨平台,轻量高效的序列化数据结构。 广泛用于服务器间通信以及存档存储磁盘上的数据。">
+<meta property="og:description" content="Google Protocol Buffer(简称Protobuf)是 Google开发的一种跨语言跨平台,轻量高效的序列化数据结构。广泛用于服务器间通信以及存档存储磁盘上的数据。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-19T03:52:58.000Z">
 <meta property="article:modified_time" content="2024-02-18T08:25:58.788Z">
@@ -127,18 +127,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -228,32 +228,36 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Google Protocol Buffer(简称Protobuf)是 Google开发的一种跨语言跨平台,轻量高效的序列化数据结构。<br>
-广泛用于服务器间通信以及存档存储磁盘上的数据。</p>
+        <p>Google Protocol Buffer(简称Protobuf)是 Google开发的一种跨语言跨平台,轻量高效的序列化数据结构。<br>广泛用于服务器间通信以及存档存储磁盘上的数据。</p>
 <span id="more"></span> 
 <p>一个入门的例子是</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">message Person &#123;</span><br><span class="line">  optional string name = 1;</span><br><span class="line">  optional int32 id = 2;</span><br><span class="line">  optional string email = 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="1-安装">1. 安装</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf/releases/tag/v3.20.1-rc1">3.20RC版本下载地址</a></p>
-<p>命令行基本使用:</p>
+
+
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><p><a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf/releases/tag/v3.20.1-rc1">3.20RC版本下载地址</a>  </p>
+<p>命令行基本使用:  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc --proto_path=. --java_out=../../ hello.proto</span><br></pre></td></tr></table></figure>
 <p>其中，<code>--proto_path</code>可以简写为<code>-I</code></p>
 <blockquote>
-<p>为啥用老版本？新的22RC版本有bug啊：<br>
-[Java Compile Error on parseUnknownField]（<a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf/issues/10695%EF%BC%89">https://github.com/protocolbuffers/protobuf/issues/10695）</a></p>
+<p>为啥用老版本？新的22RC版本有bug啊：<br>[Java Compile Error on parseUnknownField]（<a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf/issues/10695%EF%BC%89">https://github.com/protocolbuffers/protobuf/issues/10695）</a></p>
 </blockquote>
-<p>如果是IDEA中使用，主要是通过插件调用本地安装的protoc来实现，或者通过org.xolstice提供的maven插件。个人感觉在初期学习的话，直接使用本地安装的protoc更简单明了，后期在项目中集成的话考虑不依赖本地的maven插件。</p>
+<p>如果是IDEA中使用，主要是通过插件调用本地安装的protoc来实现，或者通过org.xolstice提供的maven插件。个人感觉在初期学习的话，直接使用本地安装的protoc更简单明了，后期在项目中集成的话考虑不依赖本地的maven插件。  </p>
 <p><a target="_blank" rel="noopener" href="https://w3sun.com/1287.html">IDEA中集成protoc，讲的全面靠谱的</a></p>
-<h2 id="2-基本用法">2. 基本用法</h2>
-<p>推荐prot3</p>
+<h2 id="2-基本用法"><a href="#2-基本用法" class="headerlink" title="2. 基本用法"></a>2. 基本用法</h2><p>推荐prot3  </p>
 <p><a target="_blank" rel="noopener" href="https://protobuf.dev/programming-guides/proto3/">https://protobuf.dev/programming-guides/proto3/</a></p>
-<h2 id="3-grpc">3. grpc</h2>
-<p>grpc的代码生成依赖于protoc-gen-grpc-java插件</p>
-<p><a target="_blank" rel="noopener" href="https://repo.maven.apache.org/maven2/io/grpc/protoc-gen-grpc-java/">插件下载地址</a><br>
-主要是添加两项参数<br>
-<code>--plugin=protoc-gen-grpc-java=</code> 和<code>--grpc-java_out=</code><br>
-用法：</p>
+<h2 id="3-grpc"><a href="#3-grpc" class="headerlink" title="3. grpc"></a>3. grpc</h2><p>grpc的代码生成依赖于protoc-gen-grpc-java插件  </p>
+<p><a target="_blank" rel="noopener" href="https://repo.maven.apache.org/maven2/io/grpc/protoc-gen-grpc-java/">插件下载地址</a><br>主要是添加两项参数<br><code>--plugin=protoc-gen-grpc-java=</code> 和<code>--grpc-java_out=</code><br>用法：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc -I=. --plugin=protoc-gen-grpc-java=D:\Tools\protoc-3.20.1-rc-1-win64\bin\grpc-java.exe   --java_out=../../   --grpc-java_out=../../    hello.proto</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
 
     </div>
 

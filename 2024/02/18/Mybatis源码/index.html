@@ -143,18 +143,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -254,7 +254,7 @@
 <h2 id="Mybatis主要执行流程："><a href="#Mybatis主要执行流程：" class="headerlink" title="Mybatis主要执行流程："></a>Mybatis主要执行流程：</h2><p>​<img src="/images/assets/image-20231130162207-amricr9.png" alt="image">​</p>
 <ol>
 <li><p>解析主配置文件，初始化<code>SqlSessionFactory</code>​​​</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">org.apache.ibatis.session.SqlSessionFactoryBuilder#build(java.io.InputStream, java.lang.String, java.util.Properties) &#123;</span><br><span class="line">	<span class="type">XMLConfigBuilder</span> <span class="variable">parser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XMLConfigBuilder</span>(inputStream, environment, properties);</span><br><span class="line">    <span class="keyword">return</span> build(parser.parse());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">org.apache.ibatis.builder.xml.XMLConfigBuilder#parseConfiguration(XNode root) &#123; </span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// 读取environments配置，初始化TransactionFactory 和 DataSourceFactory </span></span><br><span class="line">	environmentsElement(root.evalNode(<span class="string">&quot;environments&quot;</span>));</span><br><span class="line">	+--  <span class="type">TransactionFactory</span> <span class="variable">txFactory</span> <span class="operator">=</span> transactionManagerElement(child.evalNode(<span class="string">&quot;transactionManager&quot;</span>));</span><br><span class="line">    +--   <span class="type">DataSourceFactory</span> <span class="variable">dsFactory</span> <span class="operator">=</span> dataSourceElement(child.evalNode(<span class="string">&quot;dataSource&quot;</span>));</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// 读取mappers配置，并关联读取mapper.xml</span></span><br><span class="line">	mapperElement(root.evalNode(<span class="string">&quot;mappers&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">org.apache.ibatis.session.SqlSessionFactoryBuilder#build(java.io.InputStream, java.lang.String, java.util.Properties) &#123;</span><br><span class="line">	XMLConfigBuilder parser = <span class="keyword">new</span> XMLConfigBuilder(inputStream, environment, properties);</span><br><span class="line">    <span class="keyword">return</span> build(parser.parse());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">org.apache.ibatis.builder.xml.XMLConfigBuilder#parseConfiguration(XNode root) &#123; </span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// 读取environments配置，初始化TransactionFactory 和 DataSourceFactory </span></span><br><span class="line">	environmentsElement(root.evalNode(<span class="string">&quot;environments&quot;</span>));</span><br><span class="line">	+--  TransactionFactory txFactory = transactionManagerElement(child.evalNode(<span class="string">&quot;transactionManager&quot;</span>));</span><br><span class="line">    +--   DataSourceFactory dsFactory = dataSourceElement(child.evalNode(<span class="string">&quot;dataSource&quot;</span>));</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// 读取mappers配置，并关联读取mapper.xml</span></span><br><span class="line">	mapperElement(root.evalNode(<span class="string">&quot;mappers&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>解析mapper.xml (org.apache.ibatis.builder.xml.XMLMapperBuilder#configurationElement)</p>
@@ -373,6 +373,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/04/24/%E5%88%86%E5%B8%83%E5%BC%8F%E9%99%90%E6%B5%81sentinel/" rel="next" title="分布式限流sentinel">
+                  分布式限流sentinel <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
