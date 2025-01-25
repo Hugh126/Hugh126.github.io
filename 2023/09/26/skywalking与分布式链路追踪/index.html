@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hugh126.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":"auto","version":"8.21.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Skywalking是一款由国人主导开发的分布式链路追踪系统，它支持多种语言的探针，对国产开源软件有全面的支持，使用ES作为底层存储，具有强大的检索能力，而且有非常活跃的中文社区。¹³⁴">
+<meta property="og:type" content="article">
+<meta property="og:title" content="skywalking与分布式链路追踪">
+<meta property="og:url" content="https://hugh126.github.io/2023/09/26/skywalking%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/index.html">
+<meta property="og:site_name" content="且把清风揽入怀">
+<meta property="og:description" content="Skywalking是一款由国人主导开发的分布式链路追踪系统，它支持多种语言的探针，对国产开源软件有全面的支持，使用ES作为底层存储，具有强大的检索能力，而且有非常活跃的中文社区。¹³⁴">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hugh126.github.io/images/skywalking1.png">
+<meta property="og:image" content="https://hugh126.github.io/images/skywalking2.png">
+<meta property="og:image" content="https://hugh126.github.io/images/skywalking3.png">
+<meta property="article:published_time" content="2023-09-26T03:03:39.000Z">
+<meta property="article:modified_time" content="2024-02-18T08:29:31.937Z">
+<meta property="article:author" content="hugh">
+<meta property="article:tag" content="skywalking">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hugh126.github.io/images/skywalking1.png">
+
+
+<link rel="canonical" href="https://hugh126.github.io/2023/09/26/skywalking%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hugh126.github.io/2023/09/26/skywalking%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/","path":"2023/09/26/skywalking与分布式链路追踪/","title":"skywalking与分布式链路追踪"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>skywalking与分布式链路追踪 | 且把清风揽入怀</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">且把清风揽入怀</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E5%88%86%E5%B8%83%E5%BC%8F%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA%E7%B3%BB%E7%BB%9F%E5%BC%82%E5%90%8C"><span class="nav-number">1.</span> <span class="nav-text">一 分布式链路追踪系统异同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-docker%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">二 docker安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%AF%BC%E5%85%A5%E4%BB%93%E5%BA%93%E6%BA%90"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 导入仓库源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 安装最新版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-skywalking%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">三 skywalking安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 拉取镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%AE%89%E8%A3%85skywalking-oap"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 安装skywalking-oap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%AE%89%E8%A3%85skywalking-ui"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 安装skywalking-ui</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-%E5%BA%94%E7%94%A8%E6%8E%A5%E5%85%A5"><span class="nav-number">4.</span> <span class="nav-text">四 应用接入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-agent%E4%B8%8B%E8%BD%BD"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 agent下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E5%BA%94%E7%94%A8%E6%8E%A5%E5%85%A5"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 应用接入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-skywalking%E8%87%AA%E5%AE%9A%E4%B9%89%E6%89%A9%E5%B1%95"><span class="nav-number">5.</span> <span class="nav-text">五 skywalking自定义扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95Trace"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 自定义方法Trace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E8%BE%93%E5%87%BASpan%E6%97%A5%E5%BF%97%E5%88%B0skywalking"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 输出Span日志到skywalking</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hugh</p>
+  <div class="site-description" itemprop="description">道阻且长, 行则将至</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hugh126.github.io/2023/09/26/skywalking%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hugh">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="且把清风揽入怀">
+      <meta itemprop="description" content="道阻且长, 行则将至">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="skywalking与分布式链路追踪 | 且把清风揽入怀">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          skywalking与分布式链路追踪
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-26 11:03:39" itemprop="dateCreated datePublished" datetime="2023-09-26T11:03:39+08:00">2023-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-18 16:29:31" itemprop="dateModified" datetime="2024-02-18T16:29:31+08:00">2024-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="skywalking与分布式链路追踪" href="/2023/09/26/skywalking%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::5cd8c3a115e8f1b3e0ce5d89ceb6f504" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>Skywalking是一款由国人主导开发的分布式链路追踪系统，它支持多种语言的探针，对国产开源软件有全面的支持，使用ES作为底层存储，具有强大的检索能力，而且有非常活跃的中文社区。¹³⁴</p>
+<span id="more"></span>
+
+<h1 id="一-分布式链路追踪系统异同"><a href="#一-分布式链路追踪系统异同" class="headerlink" title="一 分布式链路追踪系统异同"></a>一 分布式链路追踪系统异同</h1><p>其他的分布式链路追踪系统有很多，比如谷歌的Dapper，韩国的Pinpoint，Twitter的Zipkin，以及Jaeger等。²³ 它们各有各的优缺点，比如：</p>
+<ul>
+<li>Dapper是链路追踪领域的始祖，它提出了基于采样的跟踪方法，以及跨进程传递Trace ID和Span ID的机制。² 但是Dapper并没有开源，只是公开了它的设计思想和架构。²</li>
+<li>Pinpoint是一款功能强大的APM软件，它支持Java和PHP语言，使用HBase作为存储，具有海量存储能力，而且跟踪数据粒度非常细，用户界面也很友好。² 但是Pinpoint在社区交流上会有一定滞后，而且需要运维住一套HBase集群。²</li>
+<li>Zipkin是一款基于Dapper论文实现的开源链路追踪系统，它支持多种语言和存储方式，而且有很多社区贡献的插件和扩展。² 但是Zipkin对代码有一定的侵入性，而且用户界面比较简陋。²</li>
+<li>Jaeger是一款由Uber开源的链路追踪系统，它也是基于Dapper论文实现的，但是加入了一些新的特性，比如自适应采样和OpenTracing支持。² Jaeger使用Cassandra或ES作为存储，具有良好的可扩展性和查询能力，而且用户界面也比较美观。²</li>
+</ul>
+<p>总之，skywalking与其他分布式链路追踪系统的异同主要体现在以下几个方面：</p>
+<ul>
+<li>代码侵入性：skywalking和Pinpoint都是基于字节码注入技术实现的代码无侵入性，而Zipkin则需要在代码中添加注解或拦截器等。²</li>
+<li>存储方式：skywalking使用ES作为存储，具有强大的检索能力，而Pinpoint使用HBase作为存储，具有海量存储能力。Zipkin和Jaeger则支持多种存储方式。²</li>
+<li>用户界面：Pinpoint和Jaeger都有功能强大和美观的用户界面，而skywalking和Zipkin则相对简单。不过skywalking有一款第三方定制UI，做得比Pinpoint更漂亮。²</li>
+<li>社区活跃度：skywalking在国内社区非常活跃，可以与项目发起人零距离沟通，而Pinpoint在社区交流上会有一定滞后。Zipkin和Jaeger则在国外社区比较活跃。²</li>
+<li>支持语言：skywalking支持5种语言：Java, C#, PHP, Node.js, Go。Pinpoint只支持Java和PHP。Zipkin和Jaeger则支持多种语言。²³</li>
+<li>跟踪粒度：Pinpoint在跟踪粒度方面做得非常好，可以显示每个方法的调用时间和参数等信息。而skywalking则只显示服务之间的调用关系和时间等信息。²</li>
+</ul>
+<blockquote>
+<p>参考:<br>(1) 全网最详细的Skywalking分布式链路追踪 - 掘金. <a target="_blank" rel="noopener" href="https://juejin.cn/post/7072709231949905957">https://juejin.cn/post/7072709231949905957</a>.<br>(2) SkyWalking最全详解(作用原理及使用流程) – mikechen. <a target="_blank" rel="noopener" href="https://mikechen.cc/21974.html">https://mikechen.cc/21974.html</a>.<br>(3) 几款符合 OpenTracing 规范的分布式链路追踪组件介绍与 …. <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1781084">https://cloud.tencent.com/developer/article/1781084</a>.<br>(4) 全链路追踪技术选型：pinpoint vs skywalking - 知乎. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/436018582">https://zhuanlan.zhihu.com/p/436018582</a>.</p>
+</blockquote>
+<h1 id="二-docker安装"><a href="#二-docker安装" class="headerlink" title="二 docker安装"></a>二 docker安装</h1><h2 id="2-1-安装依赖"><a href="#2-1-安装依赖" class="headerlink" title="2.1 安装依赖"></a>2.1 安装依赖</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-导入仓库源"><a href="#2-2-导入仓库源" class="headerlink" title="2.2 导入仓库源"></a>2.2 导入仓库源</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">sudo add-apt-repository <span class="string">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu <span class="subst">$(lsb_release -cs)</span> stable&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-安装最新版本"><a href="#2-3-安装最新版本" class="headerlink" title="2.3 安装最新版本"></a>2.3 安装最新版本</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/143156163">https://zhuanlan.zhihu.com/p/143156163</a></p>
+</blockquote>
+<h1 id="三-skywalking安装"><a href="#三-skywalking安装" class="headerlink" title="三 skywalking安装"></a>三 skywalking安装</h1><p>skywalking中数据存储有两种方式， ES和默认的H2，由于ES同时有强大的分析能力，因此各类都会建议你使用ES的安装方式。<br>例如：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7058129741554909197">https://juejin.cn/post/7058129741554909197</a> ， 然而，实际上我使用docker安装ES，安装后总是会莫名崩溃；使用docker查看log日志，也是看不个所以然，甚至跟踪到skywalking本身的bug。其实，对于入门者体验为先。下面是H2存储的安装方式：  </p>
+<h2 id="3-1-拉取镜像"><a href="#3-1-拉取镜像" class="headerlink" title="3.1 拉取镜像"></a>3.1 拉取镜像</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull apache/skywalking-oap-server:9.2.0</span><br><span class="line">docker pull apache/skywalking-ui:9.2.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-安装skywalking-oap"><a href="#3-2-安装skywalking-oap" class="headerlink" title="3.2 安装skywalking-oap"></a>3.2 安装skywalking-oap</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name skywalking-oap -e TZ=Asia/Shanghai -p 12800:12800 -p 11800:11800 --restart always -d apache/skywalking-oap-server:9.2.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-安装skywalking-ui"><a href="#3-3-安装skywalking-ui" class="headerlink" title="3.3 安装skywalking-ui"></a>3.3 安装skywalking-ui</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name skywalking-ui \</span><br><span class="line"> --restart=always \</span><br><span class="line"> -e TZ=Asia/Shanghai \</span><br><span class="line"> -p 8088:8080 \</span><br><span class="line"> --link skywalking-oap:oap \</span><br><span class="line"> -e SW_OAP_ADDRESS=http://oap:12800 \</span><br><span class="line"> apache/skywalking-ui:9.2.0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由于skywalking-ui默认的8080端口很容易跟很多web服务冲突，此处docker映射到外面的8088端口<br>访问 http:&#x2F;&#x2F;{安装服务器的ip}:8088 可以看到skywalking的监控界面就安装成功了!  </p>
+</blockquote>
+<h1 id="四-应用接入"><a href="#四-应用接入" class="headerlink" title="四 应用接入"></a>四 应用接入</h1><p>spring项目的接入方式一般都是修改java应用的启动参数，附加agent。  </p>
+<h2 id="4-1-agent下载"><a href="#4-1-agent下载" class="headerlink" title="4.1 agent下载"></a>4.1 agent下载</h2><p>找到两个cdn地址，都可以。src为源码，sha为校验文件，下载另外一种压缩包：<br><a target="_blank" rel="noopener" href="https://archive.apache.org/dist/skywalking/java-agent/9.0.0/">https://archive.apache.org/dist/skywalking/java-agent/9.0.0/</a><br><a target="_blank" rel="noopener" href="https://dlcdn.apache.org/skywalking/java-agent/9.0.0/">https://dlcdn.apache.org/skywalking/java-agent/9.0.0/</a></p>
+<h2 id="4-2-应用接入"><a href="#4-2-应用接入" class="headerlink" title="4.2 应用接入"></a>4.2 应用接入</h2><p>需要添加agent地址 &#x2F; 应用名称 &#x2F; skywalking-oap的连接地址<br>参数示例：  </p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-javaagent:D:\\soft\\skywalking-agent\\skywalking-agent.jar</span><br><span class="line"><span class="attr">-Dskywalking.agent.service_name</span>=shorturl</span><br><span class="line"><span class="attr">-Dskywalking.collector.backend_service</span>=<span class="number">172.16</span>.<span class="number">90.164</span>:<span class="number">11800</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果是放到tomcat中启动，修改tomcat下的<code>bin/catalida.sh</code>，将JAVA_OPS变量附加以上参数即可。效果如下：<br><img src="/images/skywalking1.png"><br><img src="/images/skywalking2.png"><br>上面可以看到每次请求的耗时，点进去则是trace每次。可以看到，当前agent可识别http&#x2F;rpc请求，sql执行，druid拦截器等。</p>
+</blockquote>
+<h1 id="五-skywalking自定义扩展"><a href="#五-skywalking自定义扩展" class="headerlink" title="五 skywalking自定义扩展"></a>五 skywalking自定义扩展</h1><h2 id="5-1-自定义方法Trace"><a href="#5-1-自定义方法Trace" class="headerlink" title="5.1 自定义方法Trace"></a>5.1 自定义方法Trace</h2><p>在实际业务监控中，不仅是各类组合外部调用会被Trace到一次Api中，有时候一些复杂方法也会希望被集成为一个Span放进去。这时通过插件<code>apm-toolkit-trace</code>可以完成。  </p>
+<ol>
+<li><p>需要接入的应用中新增依赖  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.skywalking<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>apm-toolkit-trace<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   // 版本尽量和skywalking版本一致</span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;skywalking.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在方法上加注解  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Trace</span></span><br><span class="line"><span class="meta">@Tags(&#123;@Tag(key = &quot;originalURL&quot;, value = &quot;arg[0]&quot;),</span></span><br><span class="line"><span class="meta">        @Tag(key = &quot;tenantId&quot;, value = &quot;arg[2]&quot;)&#125;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">generateUrlMap</span><span class="params">(String originalURL, String expireDate, String tenantId, String status, String note)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>被<code>@Trace</code>修饰的方法会形成一个span放到外层接口Trace中。<br><img src="/images/skywalking3.png"></p>
+</li>
+</ol>
+<ul>
+<li>可以看到新增修饰的方法已经被标记到接口请求的trace中</li>
+</ul>
+<blockquote>
+<p>非代码侵入的trace方式参考： <a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh1991811/article/details/115379470">https://blog.csdn.net/zxh1991811/article/details/115379470</a>  </p>
+</blockquote>
+<h2 id="5-2-输出Span日志到skywalking"><a href="#5-2-输出Span日志到skywalking" class="headerlink" title="5.2 输出Span日志到skywalking"></a>5.2 输出Span日志到skywalking</h2><ul>
+<li>skywalking的自定义Trace可以帮助我们融入业务指标，定位到业务异常。但是，如果还需要反过来去日志服务中寻找相关异常，岂不是很浪费时间。这一节就是要解决这个痛点!<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wb4927598/article/details/119192594">https://blog.csdn.net/wb4927598/article/details/119192594</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wepay199.png" alt="hugh 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/skywalking/" rel="tag"># skywalking</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/14/kafka%E5%85%A5%E9%97%A8/" rel="prev" title="kafka入门">
+                  <i class="fa fa-angle-left"></i> kafka入门
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/26/%E4%BB%8EDocker%E5%88%B0Kubernetes/" rel="next" title="从Docker到Kubernetes">
+                  从Docker到Kubernetes <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="5cd8c3a115e8f1b3e0ce5d89ceb6f504"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Hugh</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Hugh126" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyxzw6K0q","appkey":"864dbb0675cf47d4f59c867dcbb4a62f","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

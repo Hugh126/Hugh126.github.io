@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hugh126.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":"auto","version":"8.21.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="作为后端&#x2F;架构人员，在技术选型、服务架构设计的时候，或是造完一个轮子的时候，总是想尝试下极限在哪。此刻压测必不可少，此文介绍各种常见压测工具优缺点，也记录下基本用法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="压力测试">
+<meta property="og:url" content="https://hugh126.github.io/2023/06/29/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="且把清风揽入怀">
+<meta property="og:description" content="作为后端&#x2F;架构人员，在技术选型、服务架构设计的时候，或是造完一个轮子的时候，总是想尝试下极限在哪。此刻压测必不可少，此文介绍各种常见压测工具优缺点，也记录下基本用法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-29T07:22:59.000Z">
+<meta property="article:modified_time" content="2024-04-11T03:37:57.898Z">
+<meta property="article:author" content="hugh">
+<meta property="article:tag" content="压力测试">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hugh126.github.io/2023/06/29/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hugh126.github.io/2023/06/29/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/","path":"2023/06/29/压力测试/","title":"压力测试"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>压力测试 | 且把清风揽入怀</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">且把清风揽入怀</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E8%AF%B4%E4%B8%8B%E7%BB%93%E8%AE%BA"><span class="nav-number">1.1.</span> <span class="nav-text">先说下结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81Jmeter"><span class="nav-number">2.</span> <span class="nav-text">一、Jmeter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 安装使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%B1%87%E6%80%BB%E6%8A%A5%E5%91%8A"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 汇总报告</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Apache-Benchmark"><span class="nav-number">3.</span> <span class="nav-text">二、Apache Benchmark</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%B1%87%E6%80%BB%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 汇总结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81sysbench"><span class="nav-number">4.</span> <span class="nav-text">三、sysbench</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E7%AE%80%E4%BB%8B"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E8%BF%9B%E9%98%B6"><span class="nav-number">4.3.</span> <span class="nav-text">3.2 进阶</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81java-jdk-concurrent"><span class="nav-number">5.</span> <span class="nav-text">四、java.jdk.concurrent</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hugh</p>
+  <div class="site-description" itemprop="description">道阻且长, 行则将至</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hugh126.github.io/2023/06/29/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hugh">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="且把清风揽入怀">
+      <meta itemprop="description" content="道阻且长, 行则将至">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="压力测试 | 且把清风揽入怀">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          压力测试
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-06-29 15:22:59" itemprop="dateCreated datePublished" datetime="2023-06-29T15:22:59+08:00">2023-06-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-11 11:37:57" itemprop="dateModified" datetime="2024-04-11T11:37:57+08:00">2024-04-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="压力测试" href="/2023/06/29/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::d43a942e74aade212fb08f9827679c7d" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>作为后端&#x2F;架构人员，在技术选型、服务架构设计的时候，或是造完一个轮子的时候，总是想尝试下极限在哪。此刻压测必不可少，此文介绍各种常见压测工具优缺点，也记录下基本用法。</p>
+<span id="more"></span>
+
+<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><h2 id="先说下结论"><a href="#先说下结论" class="headerlink" title="先说下结论"></a>先说下结论</h2><ul>
+<li>对于并发测试，首推Jmeter。原因：功能强大、可视化、速度很快。熟悉ab工具的，也可以使用ab，一行命令就搞定。 </li>
+<li>对于数据库测试，必用sysbench。原因：功能强大，可扩展，还可以造数据。<code>注意：不支持windows</code>  </li>
+<li>对于复杂一点的测试，很难找到现成工具，那就自己造轮子吧<blockquote>
+<p>有人会说postman也可以测试，还支持前置脚本。其实那不是并发，而且也没有汇总结果。再说下国产新的<code>Apifox</code>，搜索Jmeter居然出来的是它，而且广告做的到处都是。我最近的测试首先就用了它，结果大失所望，功能配置好像是很强大的，集成了很多。可是，太慢了…可能，这也是国产软件的通病。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="一、Jmeter"><a href="#一、Jmeter" class="headerlink" title="一、Jmeter"></a>一、Jmeter</h1><p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/">Jmeter</a>Jmeter是由Apache公司开发的一个纯Java的开源项目，即可以用于做接口测试也可以用于做性能测试。  </p>
+<h2 id="1-1-安装使用步骤"><a href="#1-1-安装使用步骤" class="headerlink" title="1.1 安装使用步骤"></a>1.1 安装使用步骤</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142897766">参考</a><br>    基本使用步骤：<br>    1. 测试计划 -&gt; 添加 -&gt; 线程（用户）-&gt; 线程组<br>    2. 线程组 -&gt; 添加 -&gt; 取样器 -&gt; HTTP请求<br>    3. HTTP请求 -&gt; 添加 -&gt; 监听器 -&gt; 查看结果树<br>    4. HTTP请求 -&gt; 添加 -&gt; 监听器 -&gt; 汇总报告 </p>
+<h2 id="1-2-汇总报告"><a href="#1-2-汇总报告" class="headerlink" title="1.2 汇总报告"></a>1.2 汇总报告</h2><p><strong>汇总报告结果默认时间单位是ms</strong></p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/797451">Jmeter性能指标分析参考</a>  </p>
+<h1 id="二、Apache-Benchmark"><a href="#二、Apache-Benchmark" class="headerlink" title="二、Apache Benchmark"></a>二、Apache Benchmark</h1><p>Apache 出品的一个 HTTP 服务器性能测试工具。使用它可以测试每秒请求数、吞吐率等参数。  </p>
+<h2 id="2-1-基本用法"><a href="#2-1-基本用法" class="headerlink" title="2.1 基本用法"></a>2.1 基本用法</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># -c  设定并发数，默认并发数是 <span class="number">1</span></span><br><span class="line"># -n  设定压测的请求总数</span><br><span class="line"># -t  设定压测的时长，单位是秒</span><br><span class="line">ab -c <span class="number">10</span> -n <span class="number">1000</span> http://example.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-汇总结果"><a href="#2-2-汇总结果" class="headerlink" title="2.2 汇总结果"></a>2.2 汇总结果</h2><p>主要看两个参数<code>Requests per second</code>和<code>Percentage of the request</code>吧<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011585609/article/details/104821068">使用参考</a></p>
+<h1 id="三、sysbench"><a href="#三、sysbench" class="headerlink" title="三、sysbench"></a>三、sysbench</h1><h2 id="3-1-简介"><a href="#3-1-简介" class="headerlink" title="3.1 简介"></a>3.1 简介</h2><p>sysbench内置的测试项包括内存&#x2F;CPU&#x2F;线程&#x2F;事务&#x2F;互斥锁，但是一般用来做数据库的测试。 它是全开源的<code>lua</code>写的，各种测试运行都基于lua脚本，可以很便捷的扩展。<br>它主要是三个阶段：<br>prepare（准备数据）&#x2F; run（执行测试）&#x2F; clean（清理测试数据）  </p>
+<h2 id="3-2-基本使用"><a href="#3-2-基本使用" class="headerlink" title="3.2 基本使用"></a>3.2 基本使用</h2><p>例如你只是想测试下新搭建的mysql集群读写性能，你可以：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 准备数据：创建<span class="number">5</span>个表，每个表<span class="number">100</span>条数据</span><br><span class="line">sysbench /usr/share/sysbench/oltp_read_write.lua <span class="comment">--tables=5 --table_size=100 --mysql-user=root --mysql-password=xxx --mysql-host=192.168.0.103 --mysql-port=3306 --mysql-db=sysbench_test prepare</span></span><br><span class="line"># 使用的线程数量为<span class="number">16</span>个，使用的存储引擎为InnoDB，测试事务运行</span><br><span class="line">sysbench  <span class="comment">--num-threads=16 --test=oltp --mysql-table-engine=innodb --tables=5 --table_size=100 --mysql-user=root --mysql-password=xxx --mysql-host=192.168.0.103 --mysql-port=3306 --mysql-db=sysbench_test run</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-进阶"><a href="#3-2-进阶" class="headerlink" title="3.2 进阶"></a>3.2 进阶</h2><p>可以发现，准备阶段给我们生成的测试数据结构是固定的。如果我们想更贴切地模拟想要测试的内容，可以像上一段中使用的LUA脚本地址：<code>/usr/share/sysbench/oltp_read_write.lua</code>。这个是自带的lua脚本，也可以自定义一套。  </p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tangbinghaochi/p/6292905.html">sysbench使用参考</a></p>
+<h1 id="四、java-jdk-concurrent"><a href="#四、java-jdk-concurrent" class="headerlink" title="四、java.jdk.concurrent"></a>四、java.jdk.concurrent</h1><p>jdk并发包下有很多工具也可以实现并发请求，对于一些需要构造数据或有特定步骤的复杂测试，自己编码反而更为便利。这里以<code>CountDownLatch</code>为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line">Function&lt;Integer, Thread&gt; supplier = index -&gt; (<span class="keyword">new</span> Thread(()-&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        countDownLatch.await();</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">        log.warn(Thread.currentThread().getName() + <span class="string">&quot; : index &quot;</span> + index + <span class="string">&quot; done&quot;</span> );</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br><span class="line">IntStream.range(<span class="number">1</span>, <span class="number">11</span>).mapToObj(x -&gt; supplier.apply(x)).forEach(executorService::submit);</span><br><span class="line">countDownLatch.countDown();</span><br><span class="line"><span class="keyword">while</span> (!executorService.awaitTermination(<span class="number">200L</span>,TimeUnit.MILLISECONDS)) &#123;</span><br><span class="line">    executorService.shutdown();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wepay199.png" alt="hugh 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" rel="tag"># 压力测试</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/13/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/" rel="prev" title="DDD领域驱动设计">
+                  <i class="fa fa-angle-left"></i> DDD领域驱动设计
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/07/arthas%E7%AE%80%E8%BF%B0/" rel="next" title="arthas简述">
+                  arthas简述 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="d43a942e74aade212fb08f9827679c7d"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Hugh</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Hugh126" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyxzw6K0q","appkey":"864dbb0675cf47d4f59c867dcbb4a62f","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

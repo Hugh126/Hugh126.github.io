@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hugh126.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":"auto","version":"8.21.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="日常开发经常会遇到文件请求的需求，那如何优雅地处理正常场景下获取二进制文件，以及异常场景反馈异常信息呢">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Axios兼容json和blob格式处理办法">
+<meta property="og:url" content="https://hugh126.github.io/2024/12/08/Axios%E5%85%BC%E5%AE%B9json%E5%92%8Cblob%E6%A0%BC%E5%BC%8F%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/index.html">
+<meta property="og:site_name" content="且把清风揽入怀">
+<meta property="og:description" content="日常开发经常会遇到文件请求的需求，那如何优雅地处理正常场景下获取二进制文件，以及异常场景反馈异常信息呢">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-08T04:07:10.000Z">
+<meta property="article:modified_time" content="2024-12-23T12:19:21.681Z">
+<meta property="article:author" content="hugh">
+<meta property="article:tag" content="Axios">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hugh126.github.io/2024/12/08/Axios%E5%85%BC%E5%AE%B9json%E5%92%8Cblob%E6%A0%BC%E5%BC%8F%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hugh126.github.io/2024/12/08/Axios%E5%85%BC%E5%AE%B9json%E5%92%8Cblob%E6%A0%BC%E5%BC%8F%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/","path":"2024/12/08/Axios兼容json和blob格式处理办法/","title":"Axios兼容json和blob格式处理办法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Axios兼容json和blob格式处理办法 | 且把清风揽入怀</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">且把清风揽入怀</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Axios%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1. Axios简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Axios%E5%89%8D%E7%AB%AF%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">2. Axios前端处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%90%8E%E7%AB%AF%E5%93%8D%E5%BA%94"><span class="nav-number">3.</span> <span class="nav-text">3. 后端响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%85%B6%E4%BB%96"><span class="nav-number">4.</span> <span class="nav-text">4. 其他</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hugh</p>
+  <div class="site-description" itemprop="description">道阻且长, 行则将至</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hugh126.github.io/2024/12/08/Axios%E5%85%BC%E5%AE%B9json%E5%92%8Cblob%E6%A0%BC%E5%BC%8F%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hugh">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="且把清风揽入怀">
+      <meta itemprop="description" content="道阻且长, 行则将至">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Axios兼容json和blob格式处理办法 | 且把清风揽入怀">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Axios兼容json和blob格式处理办法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-12-08 12:07:10" itemprop="dateCreated datePublished" datetime="2024-12-08T12:07:10+08:00">2024-12-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-23 20:19:21" itemprop="dateModified" datetime="2024-12-23T20:19:21+08:00">2024-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Axios兼容json和blob格式处理办法" href="/2024/12/08/Axios%E5%85%BC%E5%AE%B9json%E5%92%8Cblob%E6%A0%BC%E5%BC%8F%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::b5b669d5b292b03f157517c00cd9ac0c" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>日常开发经常会遇到文件请求的需求，那如何优雅地处理正常场景下获取二进制文件，以及异常场景反馈异常信息呢</p>
+<span id="more"></span>
+
+<blockquote>
+<p>先说结论:<br>前端请求时使用<code>responseType: &#39;blob&#39;</code>预先声明。  </p>
+<ol>
+<li>正常场景：后端返回二进制文件时添加文件类型Header如：<code>Content-Type : application/octet-stream</code>,此时前端获取内容即为二进制文件 </li>
+<li>异常场景：后端添加<code>Content-Type : application/json</code>直接返回带有异常信息的JSON。此时，前端需要将blob对象转JSON</li>
+</ol>
+</blockquote>
+<h2 id="1-Axios简介"><a href="#1-Axios简介" class="headerlink" title="1. Axios简介"></a>1. Axios简介</h2><p>Axios 是一个基于<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise">promise</a>的网络请求库。除了支持Promise的API，还支持取消请求和超时处理，支持自动序列化，支持请求和响应的拦截。使用简单，功能强大<br>使用示例：</p>
+<ul>
+<li>发起一个post请求<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">axios(&#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;/user/12345&#x27;</span>,</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">firstName</span>: <span class="string">&#x27;Fred&#x27;</span>,</span><br><span class="line">    <span class="attr">lastName</span>: <span class="string">&#x27;Flintstone&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>用GET请求获取远程图片<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">axios(&#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;http://bit.ly/2mTM3nY&#x27;</span>,</span><br><span class="line">  <span class="attr">responseType</span>: <span class="string">&#x27;stream&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">    response.data.pipe(fs.createWriteStream(<span class="string">&#x27;ada_lovelace.jpg&#x27;</span>))</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-Axios前端处理"><a href="#2-Axios前端处理" class="headerlink" title="2. Axios前端处理"></a>2. Axios前端处理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import axios from &#x27;axios&#x27;</span><br><span class="line"></span><br><span class="line">  downloadById(directoryId) &#123;</span><br><span class="line">    const url = &#x27;...&#x27;;</span><br><span class="line">    axios(&#123;</span><br><span class="line">      method: &#x27;get&#x27;,</span><br><span class="line">      url: url,</span><br><span class="line">      responseType: &#x27;blob&#x27;,</span><br><span class="line">      headers: &#123; &#x27;Authorization&#x27;: &#x27;...&#x27; &#125;</span><br><span class="line">    &#125;).then((res) =&gt; &#123;</span><br><span class="line">      const contentType = res.headers[&#x27;content-type&#x27;];</span><br><span class="line">      if (contentType.includes(&#x27;application/json&#x27;)) &#123;</span><br><span class="line">        // 处理 JSON 格式的响应（错误信息）</span><br><span class="line">        const resText = await data.text();</span><br><span class="line">        const rspObj = JSON.parse(resText);</span><br><span class="line">        const errMsg = rspObj.msg || rspObj.code</span><br><span class="line">      &#125;else &#123;</span><br><span class="line">        // 获取二进制对象</span><br><span class="line">        const blob = new Blob([res.data])</span><br><span class="line">        // 可以使用 window.URL.createObjectURL(blob)方法创建临时URL（注意使用window.URL.revokeObjectURL）</span><br><span class="line">        // 也可以保存到本地文件</span><br><span class="line">        ... </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-后端响应"><a href="#3-后端响应" class="headerlink" title="3. 后端响应"></a>3. 后端响应</h2><p>ResponseEntity 是Spring框架中用于表示HTTP响应的实体，它封装了响应的状态码、响应头和响应体内容。它可以在控制器方法中用来返回响应，具有更高的灵活性和可控制性  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/downloadFile&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity <span class="title">downloadFile</span><span class="params">(<span class="meta">@RequestParam</span> Long directoryId, HttpServletResponse response, HttpServletRequest request)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (checkInvalid) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok().body(AjaxResult.error(<span class="string">&quot;没有下载权限&quot;</span>));</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span>  commonController.downloadFile(directoryId, response, request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h2><ol>
+<li>按照前面所说，是不是可以在前端请求时候，不要类型声明。然后它会自动转换成你想要的类型？<br>很遗憾， 我测试了没有。不声明类型的时候，正常返回二进制的时候，js判断类型也不是blob，应该是当成默认的字符串处理了。 </li>
+<li>是不是同样声明接受json，然后字符串转二进制。理论上可行，但实际上大部分时候（正常场景）都需要将字符串转二进制是不合理的。  </li>
+<li>后端在返回前端时候，是否应该设置500或者其他的状态码？这个看各自的编码规范，需要注意的是，Axios提供了请求和响应拦截器。如果在response拦截器中对响应状态码有特殊处理，请注意适配。参考：  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加请求拦截器</span></span><br><span class="line">axios.interceptors.request.use(<span class="function"><span class="keyword">function</span> (<span class="params">config</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 在发送请求之前做些什么</span></span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 对请求错误做些什么</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加响应拦截器</span></span><br><span class="line">axios.interceptors.response.use(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 2xx 范围内的状态码都会触发该函数。</span></span><br><span class="line">    <span class="comment">// 对响应数据做点什么</span></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 超出 2xx 范围的状态码都会触发该函数。</span></span><br><span class="line">    <span class="comment">// 对响应错误做点什么</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></li>
+<li>由于axios支持finally，因此最好是处理error，并在finally中定义好回调。以下是增加一个loading遮罩的例子：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 调用</span></span><br><span class="line">      <span class="keyword">const</span> loading = <span class="built_in">this</span>.$loading(&#123; <span class="comment">// 声明一个loading对象</span></span><br><span class="line">        <span class="attr">lock</span>: <span class="literal">true</span>, <span class="comment">// 是否锁屏</span></span><br><span class="line">        <span class="attr">text</span>: <span class="string">&#x27;正在下载...&#x27;</span>, <span class="comment">// 加载动画的文字</span></span><br><span class="line">        <span class="attr">spinner</span>: <span class="string">&#x27;el-icon-loading&#x27;</span>, <span class="comment">// 引入的loading图标</span></span><br><span class="line">        <span class="attr">background</span>: <span class="string">&#x27;rgba(0, 0, 0, 0.7)&#x27;</span>, <span class="comment">// 背景颜色</span></span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;.sub-main&#x27;</span>, <span class="comment">// 需要遮罩的区域</span></span><br><span class="line">        <span class="attr">body</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">customClass</span>: <span class="string">&#x27;mask&#x27;</span> <span class="comment">// 遮罩层新增类名</span></span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="built_in">this</span>.$download.downloadById(row.id, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        loading.close()</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 封装</span></span><br><span class="line">      <span class="function"><span class="title">downloadById</span>(<span class="params">directoryId, callback</span>)</span> &#123;</span><br><span class="line">        axios(&#123;</span><br><span class="line">            <span class="attr">method</span>: <span class="string">&#x27;get/post&#x27;</span>,</span><br><span class="line">            <span class="attr">url</span>: url,</span><br><span class="line">            <span class="attr">responseType</span>: <span class="string">&#x27;blob&#x27;</span>,</span><br><span class="line">            <span class="attr">headers</span>: &#123; <span class="string">&#x27;Authorization&#x27;</span>:  <span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line">          &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">            </span><br><span class="line">          &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">          &#125;).finally(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            callback()</span><br><span class="line">          &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wepay199.png" alt="hugh 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Axios/" rel="tag"># Axios</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/29/%E7%90%86%E8%A7%A3Raft%E7%AE%80%E8%BF%B0/" rel="prev" title="理解Raft简述">
+                  <i class="fa fa-angle-left"></i> 理解Raft简述
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="b5b669d5b292b03f157517c00cd9ac0c"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Hugh</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Hugh126" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyxzw6K0q","appkey":"864dbb0675cf47d4f59c867dcbb4a62f","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

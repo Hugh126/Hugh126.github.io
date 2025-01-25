@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hugh126.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":"auto","version":"8.21.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="hexo使用概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo Guide">
+<meta property="og:url" content="https://hugh126.github.io/2023/03/23/Hexo-Guide/index.html">
+<meta property="og:site_name" content="且把清风揽入怀">
+<meta property="og:description" content="hexo使用概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-23T03:45:58.000Z">
+<meta property="article:modified_time" content="2024-04-11T03:39:10.637Z">
+<meta property="article:author" content="hugh">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hugh126.github.io/2023/03/23/Hexo-Guide/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://hugh126.github.io/2023/03/23/Hexo-Guide/","path":"2023/03/23/Hexo-Guide/","title":"Hexo Guide"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hexo Guide | 且把清风揽入怀</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">且把清风揽入怀</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">1、安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">2、初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">3、编译运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">4、设置主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">5、新建文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E7%BC%96%E8%AF%91%E5%B9%B6%E8%BF%90%E8%A1%8C"><span class="nav-number">6.</span> <span class="nav-text">6、编译并运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">7、图片资源问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E9%83%A8%E7%BD%B2%E5%88%B0github"><span class="nav-number">8.</span> <span class="nav-text">8、部署到github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81%E8%AE%BE%E7%BD%AE%E8%8F%9C%E5%8D%95"><span class="nav-number">9.</span> <span class="nav-text">9、设置菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD"><span class="nav-number">10.</span> <span class="nav-text">10、添加评论功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81%E9%85%8D%E7%BD%AEwaline"><span class="nav-number">11.</span> <span class="nav-text">11、配置waline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81%E9%85%8D%E7%BD%AEValine"><span class="nav-number">12.</span> <span class="nav-text">12、配置Valine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%BB%9F%E8%AE%A1"><span class="nav-number">13.</span> <span class="nav-text">配置统计</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hugh</p>
+  <div class="site-description" itemprop="description">道阻且长, 行则将至</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hugh126.github.io/2023/03/23/Hexo-Guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hugh">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="且把清风揽入怀">
+      <meta itemprop="description" content="道阻且长, 行则将至">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Hexo Guide | 且把清风揽入怀">
+      <meta itemprop="description" content="hexo使用概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo Guide
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-23 11:45:58" itemprop="dateCreated datePublished" datetime="2023-03-23T11:45:58+08:00">2023-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-11 11:39:10" itemprop="dateModified" datetime="2024-04-11T11:39:10+08:00">2024-04-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hexo Guide" href="/2023/03/23/Hexo-Guide/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::b1b48ae3e5b1c9ad9a924d12307ca59d" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">hexo使用概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><p>nodeJs安装，hexo安装，设置环境变量<br>阅读<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands">官网文档</a><br>注意设置下npm的源  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org --location=global</span><br><span class="line">npm config <span class="built_in">set</span> disturl https://npm.taobao.org/dist --location=global</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2、初始化"><a href="#2、初始化" class="headerlink" title="2、初始化"></a>2、初始化</h3><p><code>hexo init blog</code>  </p>
+<blockquote>
+<p>注意:<br>本命令相当于执行了以下几步：<br>Git clone hexo-starter 和 hexo-theme-landscape 主题到当前&gt;目录或指定目录。<br> 使用 Yarn 1、pnpm 或 npm 包管理器下载依赖（如有已安装多个，则列在前面的优先）。npm 默认随 Node.js 安装。</p>
+</blockquote>
+<h3 id="3、编译运行"><a href="#3、编译运行" class="headerlink" title="3、编译运行"></a>3、编译运行</h3><p>此时，已经有一篇hello文章了，可以直接生成静态资源（将md编译为html）和运行（启动一个webServer），然后看效果。<br>两个命令可以一起运行   </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hexo generate 和 hexo server</span></span><br><span class="line">hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4、设置主题"><a href="#4、设置主题" class="headerlink" title="4、设置主题"></a>4、设置主题</h3><p>以经典nexT主题为例，只需将nexT放到theme目录下：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/next-theme/hexo-theme-next themes/next </span><br></pre></td></tr></table></figure>
+<p>然后，改下配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vim ./_config.yml</span></span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/themes/index.html">其他主题</a>  </p>
+</blockquote>
+<h3 id="5、新建文章"><a href="#5、新建文章" class="headerlink" title="5、新建文章"></a>5、新建文章</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new protobuf</span><br></pre></td></tr></table></figure>
+<p>注意到source&#x2F;_posts已经多了一篇文章 protobuf.md<br>打开编辑Ta  </p>
+<blockquote>
+<p>—标记的是文章的信息，可以看做文章的header，在最下面添加md语法内容。</p>
+</blockquote>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 标题</span></span><br><span class="line">say Hello</span><br><span class="line"><span class="section">## coding</span></span><br><span class="line">这里有一份代码</span><br><span class="line"><span class="code">`print(&quot;say Hello&quot;)`</span></span><br></pre></td></tr></table></figure>
+<p>关于文章的基本信息设置，可以参考：<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">https://hexo.io/zh-cn/docs/front-matter</a>  </p>
+<h3 id="6、编译并运行"><a href="#6、编译并运行" class="headerlink" title="6、编译并运行"></a>6、编译并运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp;  hexo s</span><br></pre></td></tr></table></figure>
+
+<h3 id="7、图片资源问题"><a href="#7、图片资源问题" class="headerlink" title="7、图片资源问题"></a>7、图片资源问题</h3><p>对于相对路径图片指向错误，无法显示的问题。<br>最后发现官网的资源文件 模块，其实早就给出了说明<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/asset-folders">https://hexo.io/zh-cn/docs/asset-folders</a> </p>
+<ul>
+<li>安装插件 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-marked --save</span><br></pre></td></tr></table></figure></li>
+<li>修改配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">post_asset_folder: true</span><br><span class="line">marked:</span><br><span class="line">  prependRoot: true</span><br><span class="line">  postAsset: true</span><br></pre></td></tr></table></figure>
+其实也可以通过安装其他插件，修改部署时图片的路径：<br><a target="_blank" rel="noopener" href="https://leay.net/2019/12/25/hexo/">https://leay.net/2019/12/25/hexo/</a></li>
+</ul>
+<h3 id="8、部署到github"><a href="#8、部署到github" class="headerlink" title="8、部署到github"></a>8、部署到github</h3><p>安装 hexo-deployer-git  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/github-pages">gitpage指南</a>  </p>
+<blockquote>
+<p>时间一久就忘记了怎么部署，还是记录一下：<br>项目根目录下会配置git的地址和提交的msg，这也是hexo的deploy的能力。<br>因此，直接 <code>hexo deploy</code>就可以部署最新的到Github.io 。同时为了避免本地内容的丢失，也需要将本地内容commit &amp;&amp; push到远端</p>
+</blockquote>
+<h3 id="9、设置菜单"><a href="#9、设置菜单" class="headerlink" title="9、设置菜单"></a>9、设置菜单</h3><p>通过主题hexT的能力，参考：<br><a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/theme-settings/custom-pages.html">https://theme-next.js.org/docs/theme-settings/custom-pages.html</a><br>修改theme&#x2F;next&#x2F;_config.yml  </p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi theme/next/_config.yml</span></span><br><span class="line"><span class="attr">sidebar:</span></span><br><span class="line">  <span class="attr">position:</span> <span class="string">left</span></span><br><span class="line">  <span class="attr">display:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="attr">about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line">  <span class="comment">#archives: /archives/ || fa fa-archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="attr">commonweal:</span> <span class="string">/404/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-heartbeat</span></span><br></pre></td></tr></table></figure>
+<p>自定义页面命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo new page about</span><br><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br><span class="line">hexo new page commonweal</span><br></pre></td></tr></table></figure>
+<h3 id="10、添加评论功能"><a href="#10、添加评论功能" class="headerlink" title="10、添加评论功能"></a>10、添加评论功能</h3><blockquote>
+<p>nexT主题已经支持多种评论系统，有代表性的有两款：</p>
+<ul>
+<li>Valine 评论系统<br>无需登录，需要注册Valine </li>
+<li>Gitment评论系统<br>基于Github的issure，需要注册注册 OAuth application<br>开始之前在<code>themes\next\package.json</code> 看看本地安装next版本。</li>
+</ul>
+</blockquote>
+<ul>
+<li>如果是Next8.1.0以下，建议直接使用<a href="#12%E9%85%8D%E7%BD%AEvaline">配置Valine</a>  </li>
+<li>如果是最新8.1以上版本，next已经取消内置Valine，也不建议降级，毕竟后续有新的特性想升级呢？<br>配置waline的配置请参考<a href="#11%E9%85%8D%E7%BD%AEwaline">配置waline</a></li>
+</ul>
+<hr>
+<p>配置之后发现一个问题，手机端无法访问到评论。显然被墙了，后续考虑私有部署。  </p>
+<h3 id="11、配置waline"><a href="#11、配置waline" class="headerlink" title="11、配置waline"></a>11、配置waline</h3><ol>
+<li>官网的教程已经很清楚了。参照着截图的步骤来， 注意选择国际版<br><a target="_blank" rel="noopener" href="https://waline.js.org/guide/get-started/">https://waline.js.org/guide/get-started/</a>  </li>
+<li>最后<code>Visit</code>跳转后地址既是博客留言板的地址，复制Ta直接配置到next的配置文件<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Waline</span></span><br><span class="line"><span class="comment"># For more information: https://waline.js.org, https://github.com/walinejs/waline</span></span><br><span class="line"><span class="attr">waline:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment">#是否开启</span></span><br><span class="line">  <span class="attr">serverURL:</span> <span class="string">xxxxxxxx.vercel.app</span> <span class="comment"># Waline #服务端地址，我们这里就是上面部署的 Vercel 地址</span></span><br><span class="line">  <span class="attr">locale:</span></span><br><span class="line">    <span class="attr">placeholder:</span> <span class="string">疑义相与析，畅所欲言，不登录也没关系哒</span> <span class="comment"># #评论框的默认文字</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># 头像风格</span></span><br><span class="line">  <span class="attr">meta:</span> [<span class="string">nick</span>,<span class="string">mail</span>] <span class="comment"># 自定义评论框上面的三个输入框的内容</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># 评论数量多少时显示分页</span></span><br><span class="line">  <span class="attr">lang:</span> <span class="string">zh-cn</span> <span class="comment"># 语言, 可选值: en, zh-cn</span></span><br><span class="line">  <span class="attr">visitor:</span> <span class="literal">true</span> <span class="comment"># 文章阅读统计</span></span><br><span class="line">  <span class="attr">comment_count:</span> <span class="literal">true</span> <span class="comment"># 如果为 false , 评论数量只会在当前评论页面显示, 主页则不显示</span></span><br><span class="line">  <span class="attr">requiredFields:</span> [<span class="string">nick</span>] <span class="comment"># 设置用户评论时必填的信息，[nick,mail]: [nick] | [nick, mail]</span></span><br><span class="line">  <span class="attr">libUrl:</span> <span class="string">https://unpkg.com/@waline/client@v2/dist/waline.js</span> <span class="comment"># Set custom library cdn url</span></span><br><span class="line">  <span class="attr">login:</span> <span class="string">enable</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="12、配置Valine"><a href="#12、配置Valine" class="headerlink" title="12、配置Valine"></a>12、配置Valine</h3><p>以下介绍Valine的使用方式：</p>
+<ol>
+<li>注册账号<br><a target="_blank" rel="noopener" href="https://console.leancloud.cn/">https://console.leancloud.cn/</a>  </li>
+<li>配置</li>
+</ol>
+<pre><code class="yml">valine:
+  enable: true 
+  appid:  # 将应用key的App ID设置在这里
+  appkey: # 将应用key的App Key设置在这里
+  notify: false
+  verify: false
+  placeholder: 留下小脚印~
+  avatar: monsterid 
+  guest_info: nick,mail,link # 自定义评论标题
+  pageSize: 10 # 分页大小，10页就自动分页
+  visitor: true # 是否允许游客评论
+</code></pre>
+<blockquote>
+<p>更多valine的配置可以参考：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wugenqiang/article/details/105744843">https://blog.csdn.net/wugenqiang/article/details/105744843</a></p>
+</blockquote>
+<ol start="3">
+<li>管理评论<br>进入 LeanCloud 官网，找到 控制台-&gt;存储-&gt;commet 中进行管理</li>
+</ol>
+<h3 id="配置统计"><a href="#配置统计" class="headerlink" title="配置统计"></a>配置统计</h3><p>网站时常需要了解本地的请求来源以及次数或用户点击数之类的统计。</p>
+<ol>
+<li><p>使用<a target="_blank" rel="noopener" href="https://umami.is/">umami</a><br>最新被安利到这个玩意儿（开源），结果hexo又又又意外的兼容了。没办法，直接上手吧。在next主题下的_config.yml中找到umami启用，并配置好网站和注册(可以使用它自带的cloud账号，免费的每月可以有10k事件和3个网址)的ID即可。  </p>
+<blockquote>
+<p>缺点很明显，这云js(<a target="_blank" rel="noopener" href="https://analytics.umami.is/script.js)%E8%A2%AB%E5%A2%99%E4%BA%86">https://analytics.umami.is/script.js)被墙了</a><br> 连统计结果view(<a target="_blank" rel="noopener" href="https://analytics.umami.is/%7BID%7D)%E4%B9%9F%E6%97%A0%E6%B3%95%E7%9B%B4%E6%8E%A5%E7%9C%8B">https://analytics.umami.is/{ID})也无法直接看</a>  </p>
+</blockquote>
+</li>
+<li><p>百度统计<br>百度统计(<a target="_blank" rel="noopener" href="https://tongji.baidu.com/)%E4%B8%AA%E4%BA%BA%E4%B9%9F%E5%8F%AF%E4%BB%A5%E6%B3%A8%E5%86%8C%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E6%B7%BB%E5%8A%A0Github%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%BD%91%E9%A1%B5%E3%80%82%E6%9C%80%E4%B8%BB%E8%A6%81%E6%98%AF%E5%9B%BD%E5%86%85%E4%B8%8D%E8%A2%AB%E5%A2%99%EF%BC%8C%E7%BB%9F%E8%AE%A1%E7%BB%B4%E5%BA%A6%E6%88%90%E7%86%9F%E4%B8%B0%E5%AF%8C%EF%BC%8C%E4%B9%9F%E8%A2%ABnext%E6%8F%92%E4%BB%B6%E9%9B%86%E6%88%90%EF%BC%8C%E5%A2%99%E8%A3%82%E6%8E%A8%E8%8D%90%EF%BC%81%E4%B8%8D%E7%84%B6%E5%B0%B1%E5%BE%97%E8%87%AA%E5%B7%B1%E6%8A%98%E8%85%BE%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D%EF%BC%8C%E8%BF%98%E5%BE%97%E6%90%AD%E5%BB%BA%E7%BB%9F%E8%AE%A1%E6%9C%8D%E5%8A%A1%E4%BA%86%E3%80%82">https://tongji.baidu.com/)个人也可以注册，也可以添加Github的个人网页。最主要是国内不被墙，统计维度成熟丰富，也被next插件集成，墙裂推荐！不然就得自己折腾服务器域名，还得搭建统计服务了。</a></p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wepay199.png" alt="hugh 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/blog/" rel="tag"># blog</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/19/protobuf/" rel="prev" title="protobuf">
+                  <i class="fa fa-angle-left"></i> protobuf
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/03/31/Spring-Cache/" rel="next" title="Spring Cache">
+                  Spring Cache <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="b1b48ae3e5b1c9ad9a924d12307ca59d"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Hugh</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Hugh126" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyxzw6K0q","appkey":"864dbb0675cf47d4f59c867dcbb4a62f","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>
